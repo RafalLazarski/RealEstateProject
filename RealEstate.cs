@@ -12,7 +12,7 @@ namespace RealEstateProject
     {
         public string Type { get; set; }
         public double Price { get; set; }
-        public double Surface { get; set; }
+        public float Surface { get; set; }
         public string City { get; set; }
         public double Rent { get; set; }
         public string Market { get; set; }
@@ -20,7 +20,7 @@ namespace RealEstateProject
         public static int RealEstateCount = 1;
 
         //działka
-        public RealEstate(double price, double surface, Cities city)
+        public RealEstate(double price, float surface, Cities city)
         {
             this.Type = "Działka";
             this.Price = price;
@@ -58,7 +58,7 @@ namespace RealEstateProject
         }
 
         //mieszkanie
-        public RealEstate(double price, double surface, Cities city, double rent, Markets market)
+        public RealEstate(double price, float surface, Cities city, double rent, Markets market)
         {
             this.Type = "Mieszkanie";
             this.Price = price;
@@ -100,6 +100,13 @@ namespace RealEstateProject
         {
             Primary,
             Secondary
+        }
+
+        public enum Types
+        {
+            Plot,
+            House,
+            Flat
         }
     }
 }
