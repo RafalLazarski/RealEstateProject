@@ -596,44 +596,50 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                         && (x.City == "Białystok" || x.City == "Moskwa")
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                         && (x.City == "Białystok" || x.City == "Buenos Aires")
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    
                 }
                 //używane
                 else if (!checkPrimary && checkSecondary)
@@ -641,44 +647,51 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
 
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    
                 }
                 //nowe
                 else if (checkPrimary && !checkSecondary)
@@ -686,88 +699,53 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                       
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => (x.Type.Equals("Mieszkanie") || x.Type.Equals("Działka")) && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                 }
                 //pusta lista
                 else if (!checkPrimary && !checkSecondary)
                 {
-                    //obojętne miasto
-                    if (checkBialystok && checkMoscow && checkBuenosAires)
-                    {
-
-                    }
-                    //bez Buenos
-                    else if (checkBialystok && checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
-                    }
-                    //bez Moskwy
-                    else if (checkBialystok && !checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
-                    }
-                    //bez Białegostoku
-                    else if (!checkBialystok && checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
-                    }
-                    //tylko Białystok
-                    else if (checkBialystok && !checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Białystok")
-                    }
-                    //tylko Buenos
-                    else if (!checkBialystok && !checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Buenos Aires")
-                    }
-                    //tylko Moskwa
-                    else if (!checkBialystok && checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Moskwa")
-                    }
-                    //pusta lista
-                    else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
-                    {
-                        this.listviewOferts.ItemsSource = null;
-                    }
                     this.listviewOferts.ItemsSource = null;
                 }
             }
@@ -780,44 +758,50 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                       
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                       
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                       
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    
                 }
                 //używane
                 else if (!checkPrimary && checkSecondary)
@@ -825,44 +809,50 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    
                 }
                 //nowe
                 else if (checkPrimary && !checkSecondary)
@@ -870,88 +860,53 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
-                    }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Dom") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    } 
                 }
                 //pusta lista
                 else if (!checkPrimary && !checkSecondary)
                 {
-                    //obojętne miasto
-                    if (checkBialystok && checkMoscow && checkBuenosAires)
-                    {
-
-                    }
-                    //bez Buenos
-                    else if (checkBialystok && checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
-                    }
-                    //bez Moskwy
-                    else if (checkBialystok && !checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
-                    }
-                    //bez Białegostoku
-                    else if (!checkBialystok && checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
-                    }
-                    //tylko Białystok
-                    else if (checkBialystok && !checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Białystok")
-                    }
-                    //tylko Buenos
-                    else if (!checkBialystok && !checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Buenos Aires")
-                    }
-                    //tylko Moskwa
-                    else if (!checkBialystok && checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Moskwa")
-                    }
-                    //pusta lista
-                    else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
-                    {
-                        this.listviewOferts.ItemsSource = null;
-                    }
                     this.listviewOferts.ItemsSource = null;
                 }
             }
@@ -964,44 +919,50 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    
                 }
                 //używane
                 else if (!checkPrimary && checkSecondary)
@@ -1009,44 +970,50 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Wtórny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
+                    
                 }
                 //nowe
                 else if (checkPrimary && !checkSecondary)
@@ -1054,88 +1021,53 @@ namespace RealEstateProject
                     //obojętne miasto
                     if (checkBialystok && checkMoscow && checkBuenosAires)
                     {
-
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                     }
                     //bez Buenos
                     else if (checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Moskwa"));
+                        
                     }
                     //bez Moskwy
                     else if (checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok" || x.City == "Buenos Aires"));
+                        
                     }
                     //bez Białegostoku
                     else if (!checkBialystok && checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires" || x.City == "Moskwa"));
+                        
                     }
                     //tylko Białystok
                     else if (checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Białystok")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Białystok"));
+                        
                     }
                     //tylko Buenos
                     else if (!checkBialystok && !checkMoscow && checkBuenosAires)
                     {
-                        && (x.City == "Buenos Aires")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Buenos Aires"));
+                        
                     }
                     //tylko Moskwa
                     else if (!checkBialystok && checkMoscow && !checkBuenosAires)
                     {
-                        && (x.City == "Moskwa")
+                        this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea) && (x.City == "Moskwa"));
+                        
                     }
                     //pusta lista
                     else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
                     {
                         this.listviewOferts.ItemsSource = null;
                     }
-                    this.listviewOferts.ItemsSource = this.RealEstatesList.Where(x => x.Type.Equals("Działka") && x.Market == "Pierwotny" && (x.Price >= lowerPrice && x.Price <= higherPrice) && (x.Surface >= smallerArea && x.Surface <= biggerArea));
                 }
                 //pusta lista
                 else if (!checkPrimary && !checkSecondary)
                 {
-                    //obojętne miasto
-                    if (checkBialystok && checkMoscow && checkBuenosAires)
-                    {
-
-                    }
-                    //bez Buenos
-                    else if (checkBialystok && checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Białystok" || x.City == "Moskwa")
-                    }
-                    //bez Moskwy
-                    else if (checkBialystok && !checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Białystok" || x.City == "Buenos Aires")
-                    }
-                    //bez Białegostoku
-                    else if (!checkBialystok && checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Buenos Aires" || x.City == "Moskwa")
-                    }
-                    //tylko Białystok
-                    else if (checkBialystok && !checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Białystok")
-                    }
-                    //tylko Buenos
-                    else if (!checkBialystok && !checkMoscow && checkBuenosAires)
-                    {
-                        && (x.City == "Buenos Aires")
-                    }
-                    //tylko Moskwa
-                    else if (!checkBialystok && checkMoscow && !checkBuenosAires)
-                    {
-                        && (x.City == "Moskwa")
-                    }
-                    //pusta lista
-                    else if (!checkBialystok && !checkMoscow && !checkBuenosAires)
-                    {
-                        this.listviewOferts.ItemsSource = null;
-                    }
                     this.listviewOferts.ItemsSource = null;
                 }
             }
