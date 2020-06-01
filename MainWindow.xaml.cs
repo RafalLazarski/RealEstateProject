@@ -27,7 +27,7 @@ namespace RealEstateProject
             InitializeComponent();
             SetVisibilityOnFirstLoad();
             this.UsersList = new List<User>();
-            this.UsersList.Add(new User("admin", "admin", "Administrator", "", true));
+            this.UsersList.Add(new User("admin", "admin", "Administrator", "", new UserPreferences(default, default, default)));
         }
 
         private void SetVisibilityOnFirstLoad()
@@ -85,7 +85,7 @@ namespace RealEstateProject
 
                 if (this.Validate())
                 {
-                    this.UsersList.Add(new User(this.textBoxLogin.Text, this.textBoxPassword.Text, this.textBoxName.Text, this.textBoxSurname.Text, false));
+                    this.UsersList.Add(new User(this.textBoxLogin.Text, this.textBoxPassword.Text, this.textBoxName.Text, this.textBoxSurname.Text, null));
                     this.textBlockName.Visibility = Visibility.Collapsed;
                     this.textBlockSurname.Visibility = Visibility.Collapsed;
                     this.textBoxName.Visibility = Visibility.Collapsed;

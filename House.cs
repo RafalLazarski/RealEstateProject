@@ -12,11 +12,14 @@ namespace RealEstateProject
         public int NumberOfFloors { get; set; }
         public double Area { get; set; }
         public string TypeOfOven { get; set; }
+        public override int RealEstateID { get => base.RealEstateID; set => base.RealEstateID = value; }
 
 
-        public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent, Markets market)
-            : base(rent, market)
+        public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, Cities city, double rent, Markets market)
+            : base(city, rent, market)
         {
+            this.RealEstateID = RealEstate.RealEstateCount;
+            RealEstate.RealEstateCount++;
             this.HousePlot = housePlot;
             this.NumberOfFloors = numberOfFloors;
             this.Area = area;

@@ -14,15 +14,16 @@ namespace RealEstateProject
         public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public bool IsAdmin { get; set; }
-        public User(string login, string password, string name, string surname, bool isAdmin)
+        public UserPreferences UserPreferences { get; set; }
+
+        public User(string login, string password, string name, string surname, UserPreferences userPreferences)
         {
             this.UserID = UsersCount;
             this.Login = login;
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
-            this.IsAdmin = isAdmin;
+            this.UserPreferences = userPreferences;
             UsersCount++;
         }
 

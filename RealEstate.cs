@@ -12,13 +12,15 @@ namespace RealEstateProject
     {
         public string Type { get; set; }
         public double Price { get; set; }
-        public double Surface { get; set; }
+        public float Surface { get; set; }
         public string City { get; set; }
         public double Rent { get; set; }
         public string Market { get; set; }
+        public virtual int RealEstateID { get; set; }
+        public static int RealEstateCount = 1;
 
         //działka
-        public RealEstate(double price, double surface, Cities city)
+        public RealEstate(double price, float surface, Cities city)
         {
             this.Type = "Działka";
             this.Price = price;
@@ -39,7 +41,7 @@ namespace RealEstateProject
         }
 
         //dom
-        public RealEstate(double rent, Markets market)
+        public RealEstate(Cities city, double rent, Markets market)
         {
             this.Type = "Dom";
             this.Rent = rent;
@@ -53,10 +55,24 @@ namespace RealEstateProject
                     this.Market = "Wtórny";
                     break;
             }
+
+            switch (city)
+            {
+                case Cities.Białystok:
+                    this.City = "Białystok";
+                    break;
+                case Cities.BuenosAires:
+                    this.City = "Buenos Aires";
+                    break;
+                case Cities.Moskwa:
+                    this.City = "Moskwa";
+                    break;
+            }
+
         }
 
         //mieszkanie
-        public RealEstate(double price, double surface, Cities city, double rent, Markets market)
+        public RealEstate(double price, float surface, Cities city, double rent, Markets market)
         {
             this.Type = "Mieszkanie";
             this.Price = price;
@@ -98,6 +114,13 @@ namespace RealEstateProject
         {
             Primary,
             Secondary
+        }
+
+        public enum Types
+        {
+            Plot,
+            House,
+            Flat
         }
     }
 }
