@@ -8,17 +8,17 @@ namespace RealEstateProject
 {
     public class UserPreferences
     {
-        public RealEstate.Types FavouriteType { get; set; }
+        public List<RealEstate.Types> FavouriteTypes { get; set; }
         //public string FavouritePrice { get; set; }
-        public RealEstate.Cities FavouriteCity { get; set; }
-        public RealEstate.Markets FavouriteMarket { get; set; }
+        public List<RealEstate.Cities> FavouriteCities { get; set; }
+        public List<RealEstate.Markets> FavouriteMarkets { get; set; }
         //public string FavouriteSurface { get; set; }
 
-        public UserPreferences(RealEstate.Types favouriteType, RealEstate.Cities favouriteCity, RealEstate.Markets favouriteMarket)
+        public UserPreferences(List<RealEstate.Types> favouriteTypes, List<RealEstate.Cities> favouriteCities, List<RealEstate.Markets> favouriteMarkets)
         {
-            this.FavouriteCity = favouriteCity;
-            this.FavouriteMarket = favouriteMarket;
-            this.FavouriteType = favouriteType;
+            this.FavouriteCities = favouriteCities;
+            this.FavouriteMarkets = favouriteMarkets;
+            this.FavouriteTypes = favouriteTypes;
         }
     }
 }
