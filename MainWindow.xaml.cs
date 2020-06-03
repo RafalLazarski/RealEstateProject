@@ -27,7 +27,10 @@ namespace RealEstateProject
             InitializeComponent();
             SetVisibilityOnFirstLoad();
             this.UsersList = new List<User>();
-            this.UsersList.Add(new User("admin", "admin", "Administrator", "", new UserPreferences(default, default, default)));
+            this.UsersList.Add(new User("admin", "admin", "Administrator", "", new UserPreferences(
+                                                                                new List<RealEstate.Types>{ RealEstate.Types.Flat, RealEstate.Types.Plot },
+                                                                                new List<RealEstate.Cities>{ RealEstate.Cities.Białystok },
+                                                                                new List<RealEstate.Markets>{ RealEstate.Markets.Primary })));
         }
 
         private void SetVisibilityOnFirstLoad()
@@ -85,7 +88,8 @@ namespace RealEstateProject
 
                 if (this.Validate())
                 {
-                    this.UsersList.Add(new User(this.textBoxLogin.Text, this.textBoxPassword.Text, this.textBoxName.Text, this.textBoxSurname.Text, null));
+                    this.UsersList.Add(new User(this.textBoxLogin.Text, this.textBoxPassword.Text, this.textBoxName.Text, this.textBoxSurname.Text, new UserPreferences(
+                        new List<RealEstate.Types>(), new List<RealEstate.Cities>(), new List<RealEstate.Markets>())));
                     this.textBlockName.Visibility = Visibility.Collapsed;
                     this.textBlockSurname.Visibility = Visibility.Collapsed;
                     this.textBoxName.Visibility = Visibility.Collapsed;

@@ -41,7 +41,7 @@ namespace RealEstateProject
         }
 
         //dom
-        public RealEstate(Cities city, double rent, Markets market)
+        public RealEstate(double rent, Markets market)
         {
             this.Type = "Dom";
             this.Rent = rent;
@@ -55,20 +55,6 @@ namespace RealEstateProject
                     this.Market = "Wtórny";
                     break;
             }
-
-            switch (city)
-            {
-                case Cities.Białystok:
-                    this.City = "Białystok";
-                    break;
-                case Cities.BuenosAires:
-                    this.City = "Buenos Aires";
-                    break;
-                case Cities.Moskwa:
-                    this.City = "Moskwa";
-                    break;
-            }
-
         }
 
         //mieszkanie

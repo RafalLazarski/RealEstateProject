@@ -15,14 +15,17 @@ namespace RealEstateProject
         public override int RealEstateID { get => base.RealEstateID; set => base.RealEstateID = value; }
 
 
-        public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, Cities city, double rent, Markets market)
-            : base(city, rent, market)
+        public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent, Markets market)
+            : base(rent, market)
         {
             this.RealEstateID = RealEstate.RealEstateCount;
             RealEstate.RealEstateCount++;
             this.HousePlot = housePlot;
             this.NumberOfFloors = numberOfFloors;
             this.Area = area;
+            this.Price = housePlot.Price;
+            this.Surface = housePlot.Surface;
+            this.City = housePlot.City;
 
             switch (typeOfOven)
             {

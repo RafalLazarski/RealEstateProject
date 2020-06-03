@@ -18,6 +18,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MessageBox = System.Windows.MessageBox;
+using System.IO;
+using Path = System.IO.Path;
 
 namespace RealEstateProject
 {
@@ -31,13 +33,12 @@ namespace RealEstateProject
 
         public List<RealEstate> RealEstatesList = new List<RealEstate>();
         public List<RealEstate> RealEstatesListTemp = new List<RealEstate>();
-
-        //do produktów
-        private RealEstate.Types[] FavouriteType { get; set; }
-        private RealEstate.Markets[] FavouriteMarket { get; set; }
-        private RealEstate.Cities[] FavouriteCity { get; set; }
+        public List<RealEstate.Cities> FavouriteCitiesListtemp = new List<RealEstate.Cities>();
+        public List<RealEstate.Markets> FavouriteMarketsListTemp = new List<RealEstate.Markets>();
+        public List<RealEstate.Types> FavouriteTypesListTemp = new List<RealEstate.Types>();
 
         //do uzytkownika
+        public User CurrentUser { get; set; }
         public bool FirstLoad { get; set; }
         public int CurrentUserID { get; set; }
         public List<User> UsersList { get; set; }
@@ -49,16 +50,12 @@ namespace RealEstateProject
 
         public MainMenu(int currentUserID, List<User> usersList)
         {
-            this.SetOnFirstLoad();
-            InitializeComponent();
-
-            
+            InitializeComponent();            
             this.CurrentUserID = currentUserID;
             this.UsersList = usersList;            
             this.SetCurrentUserDetails();
             this.SetRealEstatesList();
-            CheckUserPreferences();
-            
+            this.SetOnFirstLoad();
         }
 
         #endregion
@@ -67,105 +64,30 @@ namespace RealEstateProject
 
         private void SetOnFirstLoad()
         {
-            //Kolejność sprawdzania:
-            //Buenos, Moskwa, Białystok
-            //Primary, Secondary
-            //Plot, House, Flat
-
-            var currentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
-            currentUser.UserPreferences.FavouriteCity[0] = RealEstate.Cities.BuenosAires;
-            currentUser.UserPreferences.FavouriteCity[1] = RealEstate.Cities.Moskwa;
-            currentUser.UserPreferences.FavouriteCity[2] = default;
-
-            currentUser.UserPreferences.FavouriteMarket[0] = RealEstate.Markets.Primary;
-            currentUser.UserPreferences.FavouriteMarket[1] = default;
-
-            currentUser.UserPreferences.FavouriteType[0] = default;
-            currentUser.UserPreferences.FavouriteType[1] = RealEstate.Types.House;
-            currentUser.UserPreferences.FavouriteType[2] = RealEstate.Types.Flat;
-
-
-            
-                               
-        }
-
-        private void CheckUserPreferences()
-        {
-            var currentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
-            if (currentUser.UserPreferences.FavouriteCity[0] == RealEstate.Cities.Białystok)
-            {
-                this.CheckBoxCityBialystok.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxCityBialystok.IsChecked = false;
-            }
-            if (currentUser.UserPreferences.FavouriteCity[1] == RealEstate.Cities.Moskwa)
-            {
-                this.CheckBoxCityMoscow.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxCityMoscow.IsChecked = false;
-            }
-            if (currentUser.UserPreferences.FavouriteCity[2] == RealEstate.Cities.BuenosAires)
-            {
-                this.CheckBoxCityBuenosAires.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxCityBuenosAires.IsChecked = false;
-            }
-
-            if (currentUser.UserPreferences.FavouriteMarket[0] == RealEstate.Markets.Primary)
-            {
-                this.CheckBoxMarketPrimary.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxMarketPrimary.IsChecked = false;
-            }
-            if (currentUser.UserPreferences.FavouriteMarket[1] == RealEstate.Markets.Secondary)
-            {
-                this.CheckBoxMarketSecondary.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxMarketSecondary.IsChecked = false;
-            }
-
-            if (currentUser.UserPreferences.FavouriteType[0] == RealEstate.Types.Plot)
-            {
-                this.CheckBoxTypePlot.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxTypePlot.IsChecked = false;
-            }
-            if (currentUser.UserPreferences.FavouriteType[0] == RealEstate.Types.House)
-            {
-                this.CheckBoxTypeHome.IsChecked = true;
-            }
-            else
-            {
-                this.CheckBoxTypeHome.IsChecked = false;
-            }
-            if (currentUser.UserPreferences.FavouriteType[0] == RealEstate.Types.Flat)
-            {
-                this.CheckBoxTypeFlat.IsChecked = true;
-            }
-            else
-            {
+            var currentUserPreferences = this.CurrentUser.UserPreferences;
+            if (!currentUserPreferences.FavouriteTypes.Contains(RealEstate.Types.Flat))
                 this.CheckBoxTypeFlat.IsChecked = false;
-            }
+            if (!currentUserPreferences.FavouriteTypes.Contains(RealEstate.Types.House))
+                this.CheckBoxTypeHome.IsChecked = false;
+            if (!currentUserPreferences.FavouriteTypes.Contains(RealEstate.Types.Plot))
+                this.CheckBoxTypePlot.IsChecked = false;
+            if (!currentUserPreferences.FavouriteCities.Contains(RealEstate.Cities.Białystok))
+                this.CheckBoxCityBialystok.IsChecked = false;
+            if (!currentUserPreferences.FavouriteCities.Contains(RealEstate.Cities.BuenosAires))
+                this.CheckBoxCityBuenosAires.IsChecked = false;
+            if (!currentUserPreferences.FavouriteCities.Contains(RealEstate.Cities.Moskwa))
+                this.CheckBoxCityMoscow.IsChecked = false;
+            if (!currentUserPreferences.FavouriteMarkets.Contains(RealEstate.Markets.Primary))
+                this.CheckBoxMarketPrimary.IsChecked = false;
+            if (!currentUserPreferences.FavouriteMarkets.Contains(RealEstate.Markets.Secondary))
+                this.CheckBoxMarketSecondary.IsChecked = false;
         }
 
         private void SetRealEstatesList()
         {
-
-            this.RealEstatesList.Add(new Plot(Plot.PlotTypes.BuildingPlot, 50000, 2323, RealEstate.Cities.BuenosAires));
+            this.RealEstatesList.Add(new Plot(Plot.PlotTypes.BuildingPlot, 50000, 2323, RealEstate.Cities.Moskwa));
             this.RealEstatesList.Add(new Flat(4, 4, Flat.FlatStandards.Apartment, 5, 4, RealEstate.Cities.BuenosAires, 4, RealEstate.Markets.Secondary));
-            this.RealEstatesList.Add(new House(new Plot(Plot.PlotTypes.SummerPlot, 20000, 1000, RealEstate.Cities.Moskwa), 2, 300, House.TypesOfOven.ElectricStove, RealEstate.Cities.Moskwa, 400, RealEstate.Markets.Primary));
+            this.RealEstatesList.Add(new House(new Plot(Plot.PlotTypes.BuildingPlot, 10000, 300, RealEstate.Cities.Białystok), 2, 100, House.TypesOfOven.CoalFurnace, 600, RealEstate.Markets.Primary));
             this.RealEstatesListTemp.AddRange(this.RealEstatesList);
             this.RefreshListView();
         }
@@ -176,6 +98,7 @@ namespace RealEstateProject
             this.textblockCurrentUserLogin.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Login;
             this.textblockCurrentUserName.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Name;
             this.textblockCurrentUserSurname.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Surname;
+            this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
         }
 
         #endregion
@@ -184,6 +107,10 @@ namespace RealEstateProject
 
 
         //Do przycisków
+        private void ButtonUseFiltres_Click(object sender, RoutedEventArgs e)
+        {
+            //this.ShowRealEstateList(this.CheckHome, this.CheckPlate, this.CheckFlat, this.CheckBialystok, this.CheckMoscow, this.CheckBuenosAires, this.CheckPrimary, this.CheckSecondary);
+        }
 
         private void ButtonAddState_Click(object sender, RoutedEventArgs e)
         {
@@ -191,69 +118,86 @@ namespace RealEstateProject
         }
         private void ButtonSaveUserFilteres_Click(object sender, RoutedEventArgs e)
         {
-            ///if (this.FavouriteCity != default || this.FavouriteMarket != null || this.FavouriteType != null)
-            //{
-                this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().UserPreferences = new UserPreferences(this.FavouriteType, this.FavouriteCity, this.FavouriteMarket);
+            string preferences = CurrentUser.Login;
+            char[] userName = CurrentUser.Login.ToCharArray();
+            if(CheckBoxTypeFlat.IsChecked == true)
+            {
+                preferences += " Mieszkanie";
+            }
+            if(CheckBoxTypePlot.IsChecked == true)
+            {
+                preferences += " Działka";
+            }
+            if(CheckBoxTypeHome.IsChecked == true)
+            {
+                preferences += " Dom";
+            }
+            if(CheckBoxCityMoscow.IsChecked == true)
+            {
+                preferences += " Moskwa";
+            }
+            if(CheckBoxCityBuenosAires.IsChecked == true)
+            {
+                preferences += " BuenosAires";
+            }
+            if (CheckBoxCityBialystok.IsChecked == true)
+            {
+                preferences += " Białystok";
+            }
+            if(CheckBoxMarketPrimary.IsChecked == true)
+            {
+                preferences += " Pierwotny";
+            }
+            if(CheckBoxMarketSecondary.IsChecked == true)
+            {
+                preferences += " Wtórny";
+            }
+            bool userFirstSave = true;
+            using (StreamReader streamReader = File.OpenText(@"C:\Users\48536\Tygrys\programowanie\RealEstateProject\Preferences"))
+            {
+                string line;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    char[] lineInCharArray = line.ToCharArray();
+                    for (int i = 0; i < userName.Length; i++)
+                    {
+                        if(userName[i] == lineInCharArray[i])
+                        {
+                            userFirstSave = false;
+                        }
+                        else
+                        {
+                            userFirstSave = true;
+                            break;
+                        }
+                    }
+                    if(!userFirstSave)
+                    {
+                        string text = File.ReadAllText(@"C:\Users\48536\Tygrys\programowanie\RealEstateProject\Preferences");
+                        text.Replace(line, preferences);
+                        File.WriteAllText(@"C:\Users\48536\Tygrys\programowanie\RealEstateProject\Preferences", text);
+                    }
+                }
+            }
+            
+            if (userFirstSave)
+            {
+                using (StreamWriter streamWriter = File.AppendText(Path.Combine(@"C:\Users\48536\Tygrys\programowanie\RealEstateProject", "Preferences")))
+                {
+                    streamWriter.WriteLine(preferences);
+                }
+            }
+            this.CurrentUser.UserPreferences.FavouriteCities = this.FavouriteCitiesListtemp;
+            this.CurrentUser.UserPreferences.FavouriteMarkets = this.FavouriteMarketsListTemp;
+            this.CurrentUser.UserPreferences.FavouriteTypes = this.FavouriteTypesListTemp;
                 MessageBox.Show("Pomyślnie zapisano preferencje użytkownika");
-            //}
-            //else
-                //MessageBox.Show("Należy wybrać przynajmniej jedną prefernecję");
         }
 
-        //filtry
-        //private double ReturnLowerPrice()
-        //{
-        //    double lowerPrice = 0;
-        //    try
-        //    {
-        //        lowerPrice = Convert.ToDouble(TextBoxPriceFrom.Text);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        TextBoxPriceFrom.Text = "0";
-        //    }
-        //    return lowerPrice;
-        //}
-        //private double ReturnHigherPrice()
-        //{
-        //    double higherPrice = 10000000;
-        //    try
-        //    {
-        //        higherPrice = Convert.ToDouble(TextBoxPriceTo.Text);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        TextBoxPriceTo.Text = "10000000";
-        //    }
+        private void ButtonShowUserFilteres_Click(object sender, RoutedEventArgs e)
+        {
+            //do zrobienia
+        }
 
-        //    return higherPrice;
-        //}
-        //private double ReturnSmallerArea()
-        //{
-        //    double smallerArea = 0;
-        //    try
-        //    {
-        //        smallerArea = Convert.ToDouble(TextBoxAreaFrom.Text);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        TextBoxAreaFrom.Text = "0";
-        //    }
-        //    return smallerArea;
-        //}
-        //private double ReturnBiggerArea()
-        //{
-        //    double biggerArea = 10000;
-        //    try
-        //    {
-        //        biggerArea = Convert.ToDouble(TextBoxAreaTo.Text);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        TextBoxAreaTo.Text = "10000";
-        //    }
-        //    return biggerArea;
-        //}
 
         private void RefreshListView(List<RealEstate> tempList)
         {
@@ -270,105 +214,113 @@ namespace RealEstateProject
         //checkboxy
         private void CheckBoxTypeHome_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteType[0] = default;
+            if (this.FavouriteTypesListTemp.Contains(RealEstate.Types.House))
+                this.FavouriteTypesListTemp.Remove(RealEstate.Types.House);
             this.RealEstatesListTemp.RemoveAll(x => x.Type.Equals("Dom"));
             this.RefreshListView();
         }
         private void CheckBoxTypeHome_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteType[0] = RealEstate.Types.House;
+            this.FavouriteTypesListTemp.Add(RealEstate.Types.House);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.Type.Equals("Dom")));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxTypeFlat_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteType[1] = RealEstate.Types.Flat;
+            this.FavouriteTypesListTemp.Add(RealEstate.Types.Flat);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.Type.Equals("Mieszkanie")));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxTypeFlat_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteType[1] = default;
+            if (this.FavouriteTypesListTemp.Contains(RealEstate.Types.Flat))
+                this.FavouriteTypesListTemp.Remove(RealEstate.Types.Flat);
             this.RealEstatesListTemp.RemoveAll(x => x.Type.Equals("Mieszkanie"));
             this.RefreshListView();
         }
         private void CheckBoxTypePlot_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteType[2] = RealEstate.Types.Plot;
+            this.FavouriteTypesListTemp.Add(RealEstate.Types.Plot);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.Type.Equals("Działka")));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxTypePlot_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteType[2] = default;
+            if (this.FavouriteTypesListTemp.Contains(RealEstate.Types.Plot))
+                this.FavouriteTypesListTemp.Remove(RealEstate.Types.Plot);
             this.RealEstatesListTemp.RemoveAll(x => x.Type.Equals("Działka"));
             this.RefreshListView();
         }
         private void CheckBoxCityBialystok_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteCity[0] = RealEstate.Cities.Białystok;
+            this.FavouriteCitiesListtemp.Add(RealEstate.Cities.Białystok);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.City == "Białystok"));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxCityBialystok_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteCity[0] = default;
+            if (this.FavouriteCitiesListtemp.Contains(RealEstate.Cities.Białystok))
+                this.FavouriteCitiesListtemp.Remove(RealEstate.Cities.Białystok);
             this.RealEstatesListTemp.RemoveAll(x => x.City == "Białystok");
             this.RefreshListView();
         }
         private void CheckBoxCityMoscow_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteCity[1] = RealEstate.Cities.Moskwa;
+            this.FavouriteCitiesListtemp.Add(RealEstate.Cities.Moskwa);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.City == "Moskwa"));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxCityMoscow_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteCity[1] = default;
+            if (this.FavouriteCitiesListtemp.Contains(RealEstate.Cities.Moskwa))
+                this.FavouriteCitiesListtemp.Remove(RealEstate.Cities.Moskwa);
             this.RealEstatesListTemp.RemoveAll(x => x.City == "Moskwa");
             this.RefreshListView();
         }
         private void CheckBoxCityBuenosAires_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteCity[2] = RealEstate.Cities.BuenosAires;
+            this.FavouriteCitiesListtemp.Add(RealEstate.Cities.BuenosAires);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.City == "Buenos Aires"));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxCityBuenosAires_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteCity[2] = default;
+            if (this.FavouriteCitiesListtemp.Contains(RealEstate.Cities.BuenosAires))
+                this.FavouriteCitiesListtemp.Remove(RealEstate.Cities.BuenosAires);
             this.RealEstatesListTemp.RemoveAll(x => x.City == "Buenos Aires");
             this.RefreshListView();
         }
         private void ChceckBoxMarketPrimary_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteMarket[0] = RealEstate.Markets.Primary;
+            this.FavouriteMarketsListTemp.Add(RealEstate.Markets.Primary);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.Market == "Pierowtony"));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void ChceckBoxMarketPrimary_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteMarket[0] = default;
+            if (this.FavouriteMarketsListTemp.Contains(RealEstate.Markets.Primary))
+                this.FavouriteMarketsListTemp.Remove(RealEstate.Markets.Primary);
             this.RealEstatesListTemp.RemoveAll(x => x.City == "Pierowtny");
             this.RefreshListView();
         }
         private void CheckBoxMarketSecondary_Checked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteMarket[1] = RealEstate.Markets.Secondary;
+            this.FavouriteMarketsListTemp.Add(RealEstate.Markets.Secondary);
             this.RealEstatesListTemp.AddRange(this.RealEstatesList.Where(x => x.Market == "Wtórny"));
             this.RealEstatesListTemp = new HashSet<RealEstate>(this.RealEstatesListTemp).ToList();
             this.RefreshListView();
         }
         private void CheckBoxMarketSecondary_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.FavouriteMarket[1] = default;
+            if (this.FavouriteMarketsListTemp.Contains(RealEstate.Markets.Secondary))
+                this.FavouriteMarketsListTemp.Remove(RealEstate.Markets.Secondary);
             this.RealEstatesListTemp.RemoveAll(x => x.Market == "Wtórny");
             this.RefreshListView();
         }
