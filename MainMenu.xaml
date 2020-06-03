@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RealEstateProject"
         mc:Ignorable="d"
+        Closing="DataWindow_Closing" 
         WindowStartupLocation="CenterScreen"
         Title="MainMenu" MinHeight="600" MinWidth="900">
     <Grid>

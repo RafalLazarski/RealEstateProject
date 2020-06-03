@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateProject
 {
+    [Serializable]
     public class UserPreferences
     {
         public List<RealEstate.Types> FavouriteTypes { get; set; }

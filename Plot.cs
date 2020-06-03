@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace RealEstateProject
 {
+    [Serializable]
     public class Plot : RealEstate
     {
         public string PlotTypeName { get; set; }
         public string RealEstateType { get; set; }
         public override int RealEstateID { get => base.RealEstateID; set => base.RealEstateID = value; }
 
-        public Plot(PlotTypes plotTypeID, double price, float surface, Cities city)
-            : base(price, surface, city)
+
+        public Plot(PlotTypes plotTypeID, double price, float surface, Cities city, Markets market)
+            : base(price, surface, city, market)
         {
             this.RealEstateID = RealEstate.RealEstateCount;
             RealEstate.RealEstateCount++;

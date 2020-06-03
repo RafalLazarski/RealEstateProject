@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,10 +30,17 @@ namespace RealEstateProject
             InitializeComponent();
             SetVisibilityOnFirstLoad();
             this.UsersList = new List<User>();
-            this.UsersList.Add(new User("admin", "admin", "Administrator", "", new UserPreferences(
-                                                                                new List<RealEstate.Types>{ RealEstate.Types.Flat, RealEstate.Types.Plot },
-                                                                                new List<RealEstate.Cities>{ RealEstate.Cities.Białystok },
-                                                                                new List<RealEstate.Markets>{ RealEstate.Markets.Primary })));
+            this.ImportUsersList();
+        }
+
+        private void ImportUsersList()
+        {
+            using (Stream stream = File.Open("UsersList.txt", FileMode.Open))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                var users = (List<User>)bin.Deserialize(stream);
+                users.ForEach(x => this.UsersList.Add(x));
+            }
         }
 
         private void SetVisibilityOnFirstLoad()
@@ -116,6 +126,29 @@ namespace RealEstateProject
                 return false;
             }
             return true;
+        }
+
+        private void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            string msg = "Czy na pewno chcesz zamknąć aplikację?";
+            MessageBoxResult result =
+              MessageBox.Show(
+                msg,
+                "Potwierdzenie",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                using (Stream stream = File.Open("UsersList.txt", FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, this.UsersList);
+                }
+            }
         }
     }
 }
