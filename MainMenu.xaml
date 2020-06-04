@@ -47,24 +47,24 @@
                     <!--Rodzaj nieruchomości-->
                     <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Top">
                         <Label FontWeight="Bold">Typ Nieruchomości:</Label>
-                        <CheckBox x:Name="CheckBoxTypeHome"  IsChecked="True" Checked="CheckBoxTypeHome_Checked" Unchecked="CheckBoxTypeHome_Unchecked" Margin="0 5">Dom</CheckBox>
-                        <CheckBox x:Name="CheckBoxTypeFlat" IsChecked="True"  Checked="CheckBoxTypeFlat_Checked" Unchecked="CheckBoxTypeFlat_Unchecked" Margin="0 5">Mieszkanie</CheckBox>
-                        <CheckBox x:Name="CheckBoxTypePlot" IsChecked="True" Checked="CheckBoxTypePlot_Checked" Unchecked="CheckBoxTypePlot_Unchecked" Margin="0 5">Działka</CheckBox>
+                        <CheckBox x:Name="CheckBoxTypeHome"   Checked="CheckBoxTypeHome_Checked" Unchecked="CheckBoxTypeHome_Unchecked" Margin="0 5">Dom</CheckBox>
+                        <CheckBox x:Name="CheckBoxTypeFlat"   Checked="CheckBoxTypeFlat_Checked" Unchecked="CheckBoxTypeFlat_Unchecked" Margin="0 5">Mieszkanie</CheckBox>
+                        <CheckBox x:Name="CheckBoxTypePlot"  Checked="CheckBoxTypePlot_Checked" Unchecked="CheckBoxTypePlot_Unchecked" Margin="0 5">Działka</CheckBox>
                     </StackPanel>
                     
                     <!--Miasto-->
                     <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Top">
                         <Label FontWeight="Bold">Lokalizacja:</Label>
-                        <CheckBox x:Name="CheckBoxCityBialystok" IsChecked="True"  Checked="CheckBoxCityBialystok_Checked" Unchecked="CheckBoxCityBialystok_Unchecked" Margin="0 5">Białystok</CheckBox>
-                        <CheckBox x:Name="CheckBoxCityMoscow" IsChecked="True" Checked="CheckBoxCityMoscow_Checked" Unchecked="CheckBoxCityMoscow_Unchecked" Margin="0 5">Moskwa</CheckBox>
-                        <CheckBox x:Name="CheckBoxCityBuenosAires" IsChecked="True" Checked="CheckBoxCityBuenosAires_Checked" Unchecked="CheckBoxCityBuenosAires_Unchecked" Margin="0 5">Buenos Aires</CheckBox>
+                        <CheckBox x:Name="CheckBoxCityBialystok"  Checked="CheckBoxCityBialystok_Checked" Unchecked="CheckBoxCityBialystok_Unchecked" Margin="0 5">Białystok</CheckBox>
+                        <CheckBox x:Name="CheckBoxCityMoscow"  Checked="CheckBoxCityMoscow_Checked" Unchecked="CheckBoxCityMoscow_Unchecked" Margin="0 5">Moskwa</CheckBox>
+                        <CheckBox x:Name="CheckBoxCityBuenosAires" Checked="CheckBoxCityBuenosAires_Checked" Unchecked="CheckBoxCityBuenosAires_Unchecked" Margin="0 5">Buenos Aires</CheckBox>
                     </StackPanel>
                    
                     <!--Rynek-->
                     <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Top" >
                         <Label FontWeight="Bold">Stan:</Label>
-                        <CheckBox x:Name="CheckBoxMarketPrimary" IsChecked="True" Checked="ChceckBoxMarketPrimary_Checked" Unchecked="ChceckBoxMarketPrimary_Unchecked" Margin="0 5">Nowy</CheckBox>
-                        <CheckBox x:Name="CheckBoxMarketSecondary" IsChecked="True" Checked="CheckBoxMarketSecondary_Checked" Unchecked="CheckBoxMarketSecondary_Unchecked" Margin="0 5">Używany</CheckBox>
+                        <CheckBox x:Name="CheckBoxMarketPrimary"  Checked="ChceckBoxMarketPrimary_Checked" Unchecked="ChceckBoxMarketPrimary_Unchecked" Margin="0 5">Nowy</CheckBox>
+                        <CheckBox x:Name="CheckBoxMarketSecondary"  Checked="CheckBoxMarketSecondary_Checked" Unchecked="CheckBoxMarketSecondary_Unchecked" Margin="0 5">Używany</CheckBox>
                     </StackPanel>
                     
                     <!--Cena-->

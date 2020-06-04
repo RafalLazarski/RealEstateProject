@@ -23,7 +23,7 @@ namespace RealEstateProject
         //działka
         public RealEstate(double price, float surface, Cities city, Markets market)
         {
-            this.Type = "Działka";
+            this.Type = Types.Działka.ToString();
             this.Price = price;
             this.Surface = surface;
             this.City = city.ToString();
@@ -33,14 +33,14 @@ namespace RealEstateProject
         //dom
         public RealEstate(double rent)
         {
-            this.Type = "Dom";
+            this.Type = Types.Dom.ToString();
             this.Rent = rent;
         }
 
         //mieszkanie
         public RealEstate(double price, float surface, Cities city, double rent, Markets market)
         {
-            this.Type = "Mieszkanie";
+            this.Type = Types.Mieszkanie.ToString();
             this.Price = price;
             this.Surface = surface;
             this.Rent = rent;

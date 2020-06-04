@@ -54,7 +54,6 @@ namespace RealEstateProject
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            this.textBlockNotifications.Text = null;
             if (this.textBoxName.IsVisible)
             {
                 this.ButtonLogin.Content = "Zaloguj się";
@@ -70,20 +69,19 @@ namespace RealEstateProject
                     MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
                     menu.ButtonLogoutClick += (_sender, _e) =>
                     {
-                        this.textBlockNotifications.Text = "Pomyślnie wylogowano.";
+                        MessageBox.Show("Pomyślnie wylogowano.");
                         this.Show();
                     };
                     menu.Show();
                 }
 
                 else
-                    this.textBlockNotifications.Text = "Podano błędne dane logowania.";
+                    MessageBox.Show("Podano błędne dane logowania.");
             }
         }
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            this.textBlockNotifications.Text = null;
             if (!this.textBoxName.IsVisible)
             {
                 this.ButtonLogin.Content = "Mam już konto, zaloguj mnie!";
@@ -106,7 +104,7 @@ namespace RealEstateProject
                     this.textBoxSurname.Visibility = Visibility.Collapsed;
                     this.ButtonLogin.Content = "Zaloguj się";
                     this.ButtonRegister.Content = "Nie mam jeszcze konta, zarejestruj mnie!";
-                    this.textBlockNotifications.Text = "Pomyślnie zarejestrowano nowego użytkownika.";
+                    MessageBox.Show("Pomyślnie zarejestrowano nowego użytkownika.");
                 }
             }
         }
@@ -115,14 +113,14 @@ namespace RealEstateProject
         {
             if (this.UsersList.Where(x => x.Login == this.textBoxLogin.Text).Any())
             {
-                this.textBlockNotifications.Text = "Istnieje już użytkownik o podanym loginie";
+                MessageBox.Show("Istnieje już użytkownik o podanym loginie");
                 return false;
             }
 
             if (String.IsNullOrEmpty(this.textBlockLogin.Text) || String.IsNullOrEmpty(this.textBoxPassword.Text) ||
                     String.IsNullOrEmpty(this.textBoxName.Text) || String.IsNullOrEmpty(this.textBoxSurname.Text))
             {
-                this.textBlockNotifications.Text = "Nalezy uzupełnić wszystkie pola.";
+                MessageBox.Show("Nalezy uzupełnić wszystkie pola.");
                 return false;
             }
             return true;
