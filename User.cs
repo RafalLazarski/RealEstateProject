@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateProject
 {
+    [Serializable]
     public class User
     {
         public static int UsersCount = 1;

@@ -8,6 +8,7 @@ using System.Windows.Media.Converters;
 
 namespace RealEstateProject
 {
+    [Serializable]
     public abstract class RealEstate
     {
         public string Type { get; set; }
@@ -20,73 +21,31 @@ namespace RealEstateProject
         public static int RealEstateCount = 1;
 
         //działka
-        public RealEstate(double price, float surface, Cities city)
+        public RealEstate(double price, float surface, Cities city, Markets market)
         {
-            this.Type = "Działka";
+            this.Type = Types.Działka.ToString();
             this.Price = price;
             this.Surface = surface;
-
-            switch (city)
-            {
-                case Cities.Białystok:
-                    this.City = "Białystok";
-                    break;
-                case Cities.BuenosAires:
-                    this.City = "Buenos Aires";
-                    break;
-                case Cities.Moskwa:
-                    this.City = "Moskwa";
-                    break;
-            }
+            this.City = city.ToString();
+            this.Market = market.ToString();
         }
 
         //dom
-        public RealEstate(double rent, Markets market)
+        public RealEstate(double rent)
         {
-            this.Type = "Dom";
+            this.Type = Types.Dom.ToString();
             this.Rent = rent;
-
-            switch (market)
-            {
-                case Markets.Primary:
-                    this.Market = "Pierwotny";
-                    break;
-                case Markets.Secondary:
-                    this.Market = "Wtórny";
-                    break;
-            }
         }
 
         //mieszkanie
         public RealEstate(double price, float surface, Cities city, double rent, Markets market)
         {
-            this.Type = "Mieszkanie";
+            this.Type = Types.Mieszkanie.ToString();
             this.Price = price;
             this.Surface = surface;
             this.Rent = rent;
-
-            switch (market)
-            {
-                case Markets.Primary:
-                    this.Market = "Pierwotny";
-                    break;
-                case Markets.Secondary:
-                    this.Market = "Wtórny";
-                    break;
-            }
-
-            switch (city)
-            {
-                case Cities.Białystok:
-                    this.City = "Białystok";
-                    break;
-                case Cities.BuenosAires:
-                    this.City = "Buenos Aires";
-                    break;
-                case Cities.Moskwa:
-                    this.City = "Moskwa";
-                    break;
-            }
+            this.Market = market.ToString();
+            this.City = city.ToString();
         }
 
         public enum Cities
@@ -98,15 +57,15 @@ namespace RealEstateProject
 
         public enum Markets
         {
-            Primary,
-            Secondary
+            Pierwotny,
+            Wtórny
         }
 
         public enum Types
         {
-            Plot,
-            House,
-            Flat
+            Działka,
+            Dom,
+            Mieszkanie
         }
     }
 }

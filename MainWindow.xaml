@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RealEstateProject"
         WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d"
+        Closing="DataWindow_Closing" 
+        mc:Ignorable="d"         
         Title="MainWindow" MinHeight="600" MinWidth="900">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -29,9 +29,8 @@
         <TextBox x:Name="textBoxName" Grid.Row="2" Grid.Column="1"/>
         <TextBlock x:Name="textBlockSurname" Grid.Row="3" Grid.Column="0" Text="Nazwisko:"/>
         <TextBox x:Name="textBoxSurname" Grid.Row="3" Grid.Column="1"/>
-        <TextBlock x:Name="textBlockNotifications" Grid.Row="4" Grid.ColumnSpan="2" TextAlignment="Center" />
-        <Button x:Name="ButtonLogin" Grid.Row="5" Grid.Column="0" Click="ButtonLogin_Click" Content="Zaloguj"/>
-        <Button x:Name="ButtonRegister" Grid.Row="5" Grid.Column="1" Click="ButtonRegister_Click" Content="Nie mam jeszcze konta, zarejestruj mnie!"/>
+        <Button x:Name="ButtonLogin" Grid.Row="4" Grid.Column="0" Click="ButtonLogin_Click" Content="Zaloguj"/>
+        <Button x:Name="ButtonRegister" Grid.Row="4" Grid.Column="1" Click="ButtonRegister_Click" Content="Nie mam jeszcze konta, zarejestruj mnie!"/>
 
     </Grid>
 </Window>

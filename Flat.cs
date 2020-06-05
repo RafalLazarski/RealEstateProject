@@ -7,6 +7,7 @@ using System.Windows.Controls;
 
 namespace RealEstateProject
 {
+    [Serializable]
     public class Flat : RealEstate
     {
         public int FloorNumber { get; set; }

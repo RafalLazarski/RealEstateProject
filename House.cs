@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateProject
 {
+    [Serializable]
     public class House : RealEstate
     {
         public Plot HousePlot { get; set; }
@@ -15,8 +16,8 @@ namespace RealEstateProject
         public override int RealEstateID { get => base.RealEstateID; set => base.RealEstateID = value; }
 
 
-        public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent, Markets market)
-            : base(rent, market)
+        public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent)
+            : base(rent)
         {
             this.RealEstateID = RealEstate.RealEstateCount;
             RealEstate.RealEstateCount++;
@@ -24,8 +25,8 @@ namespace RealEstateProject
             this.NumberOfFloors = numberOfFloors;
             this.Area = area;
             this.Price = housePlot.Price;
-            this.Surface = housePlot.Surface;
             this.City = housePlot.City;
+            this.Market = housePlot.Market;
 
             switch (typeOfOven)
             {

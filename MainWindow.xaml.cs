@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,10 +30,17 @@ namespace RealEstateProject
             InitializeComponent();
             SetVisibilityOnFirstLoad();
             this.UsersList = new List<User>();
-            this.UsersList.Add(new User("admin", "admin", "Administrator", "", new UserPreferences(
-                                                                                new List<RealEstate.Types>{ RealEstate.Types.Flat, RealEstate.Types.Plot },
-                                                                                new List<RealEstate.Cities>{ RealEstate.Cities.Białystok },
-                                                                                new List<RealEstate.Markets>{ RealEstate.Markets.Primary })));
+            this.ImportUsersList();
+        }
+
+        private void ImportUsersList()
+        {
+            using (Stream stream = File.Open("UsersList.txt", FileMode.Open))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                var users = (List<User>)bin.Deserialize(stream);
+                users.ForEach(x => this.UsersList.Add(x));
+            }
         }
 
         private void SetVisibilityOnFirstLoad()
@@ -44,7 +54,6 @@ namespace RealEstateProject
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            this.textBlockNotifications.Text = null;
             if (this.textBoxName.IsVisible)
             {
                 this.ButtonLogin.Content = "Zaloguj się";
@@ -60,20 +69,19 @@ namespace RealEstateProject
                     MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
                     menu.ButtonLogoutClick += (_sender, _e) =>
                     {
-                        this.textBlockNotifications.Text = "Pomyślnie wylogowano.";
+                        MessageBox.Show("Pomyślnie wylogowano.");
                         this.Show();
                     };
                     menu.Show();
                 }
 
                 else
-                    this.textBlockNotifications.Text = "Podano błędne dane logowania.";
+                    MessageBox.Show("Podano błędne dane logowania.");
             }
         }
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            this.textBlockNotifications.Text = null;
             if (!this.textBoxName.IsVisible)
             {
                 this.ButtonLogin.Content = "Mam już konto, zaloguj mnie!";
@@ -96,7 +104,7 @@ namespace RealEstateProject
                     this.textBoxSurname.Visibility = Visibility.Collapsed;
                     this.ButtonLogin.Content = "Zaloguj się";
                     this.ButtonRegister.Content = "Nie mam jeszcze konta, zarejestruj mnie!";
-                    this.textBlockNotifications.Text = "Pomyślnie zarejestrowano nowego użytkownika.";
+                    MessageBox.Show("Pomyślnie zarejestrowano nowego użytkownika.");
                 }
             }
         }
@@ -105,17 +113,40 @@ namespace RealEstateProject
         {
             if (this.UsersList.Where(x => x.Login == this.textBoxLogin.Text).Any())
             {
-                this.textBlockNotifications.Text = "Istnieje już użytkownik o podanym loginie";
+                MessageBox.Show("Istnieje już użytkownik o podanym loginie");
                 return false;
             }
 
             if (String.IsNullOrEmpty(this.textBlockLogin.Text) || String.IsNullOrEmpty(this.textBoxPassword.Text) ||
                     String.IsNullOrEmpty(this.textBoxName.Text) || String.IsNullOrEmpty(this.textBoxSurname.Text))
             {
-                this.textBlockNotifications.Text = "Nalezy uzupełnić wszystkie pola.";
+                MessageBox.Show("Nalezy uzupełnić wszystkie pola.");
                 return false;
             }
             return true;
+        }
+
+        private void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            string msg = "Czy na pewno chcesz zamknąć aplikację?";
+            MessageBoxResult result =
+              MessageBox.Show(
+                msg,
+                "Potwierdzenie",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                using (Stream stream = File.Open("UsersList.txt", FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, this.UsersList);
+                }
+            }
         }
     }
 }
