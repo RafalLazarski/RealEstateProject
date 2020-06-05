@@ -521,6 +521,15 @@ namespace RealEstateProject
                 }
             }
         }
+<<<<<<< HEAD
+=======
+
+        //Trzeba sprawdzić
+        private void listviewOferts_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+>>>>>>> 83c3f6077f449a6b49467ba8c7356aa4dda88a4d
     }
 
 }

@@ -13,28 +13,29 @@
             <TabItem Header="Oferty">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition Height="5*"/>
+                        <RowDefinition MaxHeight="100" Height="2*"/>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition Height="7*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition MaxWidth="150"/>
+                        <ColumnDefinition MaxWidth="150"/>
+                        <ColumnDefinition MaxWidth="100" Width="0.6*"/>
+                        <ColumnDefinition MaxWidth="150"/>
+                        <ColumnDefinition MaxWidth="150"/>
+                        <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
 
                     <!--Produkty-->
+<<<<<<< HEAD
                     <ListView Margin="10" x:Name="listviewOferts" Grid.Row="8" Grid.ColumnSpan="12">
                         <ListView.View>
                             <GridView >
+=======
+                    <ListView Margin="10" x:Name="listviewOferts" Hyperlink.Click="listviewOferts_Click" Grid.Row="2" Grid.ColumnSpan="6">
+                        <ListView.View>
+                            <GridView>
+>>>>>>> 83c3f6077f449a6b49467ba8c7356aa4dda88a4d
                                 <GridViewColumn Header="Rodzaj:" x:Name="EstateType" Width="150" DisplayMemberBinding="{Binding Type}" />
                                 <GridViewColumn Header="Cena:" x:Name="EstatePrice" Width="150"  DisplayMemberBinding="{Binding Price}" />
                                 <GridViewColumn Header="Powierzchnia:" x:Name="EstateArea" Width="150" DisplayMemberBinding="{Binding Surface}" />
@@ -45,29 +46,91 @@
                     </ListView>
 
                     <!--Rodzaj nieruchomości-->
+<<<<<<< HEAD
                     <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Top">
                         <Label FontWeight="Bold">Typ Nieruchomości:</Label>
                         <CheckBox x:Name="CheckBoxTypeHome"   Checked="CheckBoxTypeHome_Checked" Unchecked="CheckBoxTypeHome_Unchecked" Margin="0 5">Dom</CheckBox>
                         <CheckBox x:Name="CheckBoxTypeFlat"   Checked="CheckBoxTypeFlat_Checked" Unchecked="CheckBoxTypeFlat_Unchecked" Margin="0 5">Mieszkanie</CheckBox>
                         <CheckBox x:Name="CheckBoxTypePlot"  Checked="CheckBoxTypePlot_Checked" Unchecked="CheckBoxTypePlot_Unchecked" Margin="0 5">Działka</CheckBox>
+=======
+                    
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold">Typ Nieruchomości:</Label>
+                            <CheckBox x:Name="CheckBoxTypeHome" Grid.Row="1" Grid.Column="0" Checked="CheckBoxTypeHome_Checked" Unchecked="CheckBoxTypeHome_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxTypeHome" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="Dom"/>
+                            <CheckBox x:Name="CheckBoxTypeFlat" Grid.Row="2" Grid.Column="0"  Checked="CheckBoxTypeFlat_Checked" Unchecked="CheckBoxTypeFlat_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxTypeFlat" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="Mieszkanie"/>
+                            <CheckBox x:Name="CheckBoxTypePlot" Grid.Row="3" Grid.Column="0" Checked="CheckBoxTypePlot_Checked" Unchecked="CheckBoxTypePlot_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxTypePlot" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="Działka"/>
+                        </Grid>
+>>>>>>> 83c3f6077f449a6b49467ba8c7356aa4dda88a4d
                     </StackPanel>
                     
+                    
                     <!--Miasto-->
+<<<<<<< HEAD
                     <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Top">
                         <Label FontWeight="Bold">Lokalizacja:</Label>
                         <CheckBox x:Name="CheckBoxCityBialystok"  Checked="CheckBoxCityBialystok_Checked" Unchecked="CheckBoxCityBialystok_Unchecked" Margin="0 5">Białystok</CheckBox>
                         <CheckBox x:Name="CheckBoxCityMoscow"  Checked="CheckBoxCityMoscow_Checked" Unchecked="CheckBoxCityMoscow_Unchecked" Margin="0 5">Moskwa</CheckBox>
                         <CheckBox x:Name="CheckBoxCityBuenosAires" Checked="CheckBoxCityBuenosAires_Checked" Unchecked="CheckBoxCityBuenosAires_Unchecked" Margin="0 5">Buenos Aires</CheckBox>
+=======
+                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold">Lokalizacja:</Label>
+                            <CheckBox x:Name="CheckBoxCityBialystok" Grid.Row="1" Grid.Column="0"  Checked="CheckBoxCityBialystok_Checked" Unchecked="CheckBoxCityBialystok_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxCityBialystok" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="Białystok"/>
+                            <CheckBox x:Name="CheckBoxCityMoscow" Grid.Row="2" Grid.Column="0"  Checked="CheckBoxCityMoscow_Checked" Unchecked="CheckBoxCityMoscow_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxCityMoscow" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="Moskwa"/>
+                            <CheckBox x:Name="CheckBoxCityBuenosAires" Grid.Row="3" Grid.Column="0" Checked="CheckBoxCityBuenosAires_Checked" Unchecked="CheckBoxCityBuenosAires_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxCityBuenos" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="Buenos Aires"/>
+                        </Grid>
+>>>>>>> 83c3f6077f449a6b49467ba8c7356aa4dda88a4d
                     </StackPanel>
                    
                     <!--Rynek-->
-                    <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Top" >
-                        <Label FontWeight="Bold">Stan:</Label>
-                        <CheckBox x:Name="CheckBoxMarketPrimary"  Checked="ChceckBoxMarketPrimary_Checked" Unchecked="ChceckBoxMarketPrimary_Unchecked" Margin="0 5">Nowy</CheckBox>
-                        <CheckBox x:Name="CheckBoxMarketSecondary"  Checked="CheckBoxMarketSecondary_Checked" Unchecked="CheckBoxMarketSecondary_Unchecked" Margin="0 5">Używany</CheckBox>
+                    <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold">Stan:</Label>
+                            <CheckBox x:Name="CheckBoxMarketPrimary" Grid.Row="1" Grid.Column="0" Checked="ChceckBoxMarketPrimary_Checked" Unchecked="ChceckBoxMarketPrimary_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxMarketPrimary" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="Nowy"/>
+                            <CheckBox x:Name="CheckBoxMarketSecondary" Grid.Row="2" Grid.Column="0" Checked="CheckBoxMarketSecondary_Checked" Unchecked="CheckBoxMarketSecondary_Unchecked" Margin="5 5"/>
+                            <TextBlock x:Name="TextForCheckBoxMarketSecondary" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="Używany"/>
+                        </Grid>
                     </StackPanel>
                     
                     <!--Cena-->
+<<<<<<< HEAD
                     <TextBlock Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Cena:"/>
                     <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Od:"/>
                     <TextBlock Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Do:"/>
@@ -85,12 +148,53 @@
                     <Button x:Name="ButtonUseFiltres" Grid.Row="2" Grid.Column="0" Click="ButtonUseFiltres_Click" Content="Filtruj"/>
                     <!--Pokaż nieruchomości-->
                     <Button x:Name="ButtonShowUserFilteres" Grid.Row="2" Grid.Column="1" Click="ButtonShowUserFilteres_Click" Content="Pokaż proponowane"/>
+=======
+                    <Grid Grid.Row="0" Grid.Column="3" MaxHeight="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" Margin="5" Text="Cena:"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5 0" Text="Od:"/>
+                        <TextBox x:Name="TextBoxPriceFrom" Grid.Row="1" Grid.Column="1" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="TextBoxPriceFrom_TextChanged" PreviewTextInput="TextBoxPriceFrom_PreviewTextInput"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5 0" Text="Do:"/>
+                        <TextBox x:Name="TextBoxPriceTo" Grid.Row="2" Grid.Column="1" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="TextBoxPriceTo_TextChanged" PreviewTextInput="TextBoxPriceTo_PreviewTextInput"/>
+                    </Grid>
+
+                    <!--Powierzchnia-->
+                    <Grid Grid.Row="0" Grid.Column="4" MaxHeight="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" Margin="5" Text="Powierzchnia:"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5 0" Text="Od:"/>
+                        <TextBlock  Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5 0" Text="Do:"/>
+                        <TextBox x:Name="TextBoxAreaFrom" Grid.Row="1" Grid.Column="1" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="TextBoxAreaFrom_TextChanged" PreviewTextInput="TextBoxAreaFrom_PreviewTextInput"/>
+                        <TextBox x:Name="TextBoxAreaTo" Grid.Row="2" Grid.Column="1" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="TextBoxAreaTo_TextChanged" PreviewTextInput="TextBoxAreaTo_PreviewTextInput"/>
+                    </Grid>
+
+>>>>>>> 83c3f6077f449a6b49467ba8c7356aa4dda88a4d
                     <!--Zapisz-->
-                    <Button x:Name="ButtonSaveUserFilteres" Grid.Row="3" Grid.Column="0" Click="ButtonSaveUserFilteres_Click" Content="Zapisz preferencje"/>
+                    <Button x:Name="ButtonSaveUserFilteres" Grid.Row="1" Grid.Column="4" Height="40" Width="120" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5 5" Click="ButtonSaveUserFilteres_Click" Content="Zapisz preferencje"/>
                     <!--Dodaj nieruchomości-->
-                    <Button x:Name="ButtonAddState" Grid.Row="3" Grid.Column="1" Click="ButtonAddState_Click" Content="Dodaj"/>
+                    <Button x:Name="ButtonAddState" Grid.Row="1" Grid.Column="3" Height="40" Width="120" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5 5" Click="ButtonAddState_Click" Content="Dodaj"/>
                     
                     
+<<<<<<< HEAD
+                    
+=======
+>>>>>>> 83c3f6077f449a6b49467ba8c7356aa4dda88a4d
                 </Grid>
             </TabItem>
             <TabItem Header="Moje konto" Width="300">
