@@ -29,101 +29,59 @@ namespace RealEstateProject
 
         private void SetTextBlocks(RealEstate realEstate, bool adminStatus)
         {
+            
             if(adminStatus)
             {
-                TextBlockTypeSpecification.Visibility = Visibility.Collapsed;
-                TextBlockCitySpecification.Visibility = Visibility.Collapsed;
-                TextBlockPriceSpecification.Visibility = Visibility.Collapsed;
-                TextBlockRentSpecification.Visibility = Visibility.Collapsed;
-                TextBlockMarketSpecification.Visibility = Visibility.Collapsed;
-                TextBlockSurfaceSpecification.Visibility = Visibility.Collapsed;
-                TextBlockTypeOfOvenSpecification.Visibility = Visibility.Collapsed;
-                TextBlockNumberofFloorsSpecification.Visibility = Visibility.Collapsed;
-                TextBlockHouseAreaSpecification.Visibility = Visibility.Collapsed;
-                TextBlockFlatStandardsSpecification.Visibility = Visibility.Collapsed;
-                TextBlockFloorNumberSpecification.Visibility = Visibility.Collapsed;
-                TextBlockRoomsSpecification.Visibility = Visibility.Collapsed;
-                TextBlockPlotTypesSpecification.Visibility = Visibility.Collapsed;
+                ButtonReservation.Visibility = Visibility.Collapsed;
             }
             else
             {
-                StackPanelType.Visibility = Visibility.Collapsed;
-                StackPanelCity.Visibility = Visibility.Collapsed;
-                TextBoxPriceSelect.Visibility = Visibility.Collapsed;
-                TextBoxRentSelect.Visibility = Visibility.Collapsed;
-                StackPanelMarket.Visibility = Visibility.Collapsed;
-                TextBoxSurfaceSelect.Visibility = Visibility.Collapsed;
-                StackPanelTypeOfOven.Visibility = Visibility.Collapsed;
-                TextBoxNumberofFloorsSelect.Visibility = Visibility.Collapsed;
-                TextBoxHouseAreaSelect.Visibility = Visibility.Collapsed;
-                StackPanelFlatStandards.Visibility = Visibility.Collapsed;
-                TextBoxFloorNumberSelect.Visibility = Visibility.Collapsed;
-                TextBoxRoomsSelect.Visibility = Visibility.Collapsed;
-                StackPanelPlotTypes.Visibility = Visibility.Collapsed;
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
-                ButtonAddProduct.Visibility = Visibility.Collapsed;
             }
+
             string typeOfSelectedRealEstate = realEstate.Type.ToString();
             switch (typeOfSelectedRealEstate)
             {
                 case "Dom":
                     TextBlockFlatStandards.Visibility = Visibility.Collapsed;
                     TextBlockFlatStandardsSpecification.Visibility = Visibility.Collapsed;
-                    StackPanelFlatStandards.Visibility = Visibility.Collapsed;
                     TextBlockFloorNumber.Visibility = Visibility.Collapsed;
                     TextBlockFloorNumberSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxFloorNumberSelect.Visibility = Visibility.Collapsed;
                     TextBlockRooms.Visibility = Visibility.Collapsed;
                     TextBlockRoomsSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxRoomsSelect.Visibility = Visibility.Collapsed;
                     TextBlockPlotTypes.Visibility = Visibility.Collapsed;
                     TextBlockPlotTypesSpecification.Visibility = Visibility.Collapsed;
-                    StackPanelPlotTypes.Visibility = Visibility.Collapsed;
                     break;
                 case "Mieszkanie":
                     TextBlockTypeOfOven.Visibility = Visibility.Collapsed;
                     TextBlockTypeOfOvenSpecification.Visibility = Visibility.Collapsed;
-                    StackPanelTypeOfOven.Visibility = Visibility.Collapsed;
                     TextBlockNumberofFloors.Visibility = Visibility.Collapsed;
                     TextBlockNumberofFloorsSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxNumberofFloorsSelect.Visibility = Visibility.Collapsed;
                     TextBlockHouseArea.Visibility = Visibility.Collapsed;
                     TextBlockHouseAreaSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxHouseAreaSelect.Visibility = Visibility.Collapsed;
                     TextBlockPlotTypes.Visibility = Visibility.Collapsed;
                     TextBlockPlotTypesSpecification.Visibility = Visibility.Collapsed;
-                    StackPanelPlotTypes.Visibility = Visibility.Collapsed;
-                    //TextBlockDetails.SetValue(Grid.RowProperty, 6);
-                    //TextBlockDetailsSpecification.SetValue(Grid.RowProperty, 6);
-                    //TextBlockRooms.SetValue(Grid.RowProperty, 7);
-                    //TextBlockRoomsSpecification.SetValue(Grid.RowProperty, 7);
                     break;
                 case "Działka":
                     TextBlockTypeOfOven.Visibility = Visibility.Collapsed;
                     TextBlockTypeOfOvenSpecification.Visibility = Visibility.Collapsed;
-                    StackPanelTypeOfOven.Visibility = Visibility.Collapsed;
                     TextBlockNumberofFloors.Visibility = Visibility.Collapsed;
                     TextBlockNumberofFloorsSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxNumberofFloorsSelect.Visibility = Visibility.Collapsed;
                     TextBlockHouseArea.Visibility = Visibility.Collapsed;
                     TextBlockHouseAreaSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxHouseAreaSelect.Visibility = Visibility.Collapsed;
                     TextBlockFlatStandards.Visibility = Visibility.Collapsed;
                     TextBlockFlatStandardsSpecification.Visibility = Visibility.Collapsed;
-                    StackPanelFlatStandards.Visibility = Visibility.Collapsed;
                     TextBlockFloorNumber.Visibility = Visibility.Collapsed;
                     TextBlockFloorNumberSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxFloorNumberSelect.Visibility = Visibility.Collapsed;
                     TextBlockRooms.Visibility = Visibility.Collapsed;
                     TextBlockRoomsSpecification.Visibility = Visibility.Collapsed;
-                    TextBoxRoomsSelect.Visibility = Visibility.Collapsed;
                     break;
             }
         }
 
         private void ButtonBackToMainMenu_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
+            Close();
         }
 
         private void ButtonDeleteProduct_Click(object sender, RoutedEventArgs e)
@@ -131,7 +89,7 @@ namespace RealEstateProject
 
         }
 
-        private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
+        private void ButtonReservation_Click(object sender, RoutedEventArgs e)
         {
 
         }

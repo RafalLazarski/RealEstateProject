@@ -62,12 +62,12 @@ namespace RealEstateProject
             }
             else
             {
-                var currentUser = this.UsersList.Where(x => x.Login == this.textBoxLogin.Text && x.Password == this.textBoxPassword.Text);
+                var currentUser = this.UsersList.Where(x => x.Login == this.textBoxLogin.Text && x.Password == this.passwordBox.Password);
                 if (currentUser.Any())
                 {
                     this.Hide();
                     MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
-                    
+
                     menu.ButtonLogoutClick += (_sender, _e) =>
                     {
                         MessageBox.Show("Pomyślnie wylogowano.");
@@ -98,7 +98,7 @@ namespace RealEstateProject
 
                 if (this.Validate())
                 {
-                    this.UsersList.Add(new User(this.textBoxLogin.Text, this.textBoxPassword.Text, this.textBoxName.Text, this.textBoxSurname.Text, new UserPreferences(
+                    this.UsersList.Add(new User(this.textBoxLogin.Text, this.passwordBox.Password, this.textBoxName.Text, this.textBoxSurname.Text, new UserPreferences(
                         new List<RealEstate.Types>(), new List<RealEstate.Cities>(), new List<RealEstate.Markets>())));
                     this.textBlockName.Visibility = Visibility.Collapsed;
                     this.textBlockSurname.Visibility = Visibility.Collapsed;
@@ -119,7 +119,7 @@ namespace RealEstateProject
                 return false;
             }
 
-            if (String.IsNullOrEmpty(this.textBlockLogin.Text) || String.IsNullOrEmpty(this.textBoxPassword.Text) ||
+            if (String.IsNullOrEmpty(this.textBlockLogin.Text) || String.IsNullOrEmpty(this.passwordBox.Password) ||
                     String.IsNullOrEmpty(this.textBoxName.Text) || String.IsNullOrEmpty(this.textBoxSurname.Text))
             {
                 MessageBox.Show("Nalezy uzupełnić wszystkie pola.");

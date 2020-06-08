@@ -24,7 +24,7 @@
         <TextBlock x:Name="textBlockLogin" Grid.Row="0" Grid.Column="0" Text="Login:"/>
         <TextBox x:Name="textBoxLogin" Grid.Row="0" Grid.Column="1"/>
         <TextBlock x:Name="textBlockPassword" Grid.Row="1" Grid.Column="0" Text="Hasło:"/>
-        <TextBox x:Name="textBoxPassword" Grid.Row="1" Grid.Column="1"/>
+        <PasswordBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1"  PasswordChar="*"/>
         <TextBlock x:Name="textBlockName" Grid.Row="2" Grid.Column="0" Text="Imię:"/>
         <TextBox x:Name="textBoxName" Grid.Row="2" Grid.Column="1"/>
         <TextBlock x:Name="textBlockSurname" Grid.Row="3" Grid.Column="0" Text="Nazwisko:"/>

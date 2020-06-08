@@ -49,10 +49,11 @@ namespace RealEstateProject
 
         public MainMenu(int currentUserID, List<User> usersList)
         {
-            InitializeComponent();            
+            InitializeComponent();
             this.CurrentUserID = currentUserID;
-            this.UsersList = usersList;            
+            this.UsersList = usersList;
             this.SetCurrentUserDetails();
+            this.SetTextBlocks();
             this.ImportRealEstatesList();
             this.ChangeCheckboxesSelection();
         }
@@ -62,7 +63,7 @@ namespace RealEstateProject
         #region Helper Methods
 
         private void ImportRealEstatesList()
-        { 
+        {
             using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Open))
             {
                 BinaryFormatter bin = new BinaryFormatter();
@@ -117,11 +118,14 @@ namespace RealEstateProject
             this.textblockCurrentUserName.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Name;
             this.textblockCurrentUserSurname.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Surname;
             this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
+        }
 
-            if(CurrentUserID != 0)
-            {
-                ButtonAddState.Content = "Zobacz szczegóły";
-            }
+        private void SetTextBlocks()
+        {
+            //if(ComboBoxItemHouse.IsSelected)
+            //{
+            //    MessageBox.Show("Działa");
+            //}
         }
 
         #endregion
@@ -129,32 +133,12 @@ namespace RealEstateProject
         #region Filters Methods
 
 
-        //Do przycisków
-        //private void ButtonUseFiltres_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //this.ShowRealEstateList(this.CheckHome, this.CheckPlate, this.CheckFlat, this.CheckBialystok, this.CheckMoscow, this.CheckBuenosAires, this.CheckPrimary, this.CheckSecondary);
-        //}
 
-        private void ButtonAddState_Click(object sender, RoutedEventArgs e)
+        private void ButtonShowDetails_Click(object sender, RoutedEventArgs e)
         {
-            bool ifAdmin = false;
-            if(CurrentUserID == 1)
-            {
-                ifAdmin = true;
-            }
-
             if (listviewOferts.SelectedItem == null)
-            {
-                if(ifAdmin)
-                {
-                    MessageBox.Show("Dodawanie nieruchomości przez admina");
-                }
-                else
-                {
-                    MessageBox.Show("Proszę najpierw zaznaczyć konkretną nieruchomość!");
-                }
-                
-            }
+                MessageBox.Show("Należy wybrać nieruchomość z listy.");
+
             else
             {
                 foreach (RealEstate xRealEstate in RealEstatesList)
@@ -163,7 +147,7 @@ namespace RealEstateProject
                     if (xRealEstate.RealEstateID.ToString().Equals(listviewOferts.SelectedItem.ToString()))
                     {
                         RealEstate RealEstateSelectedOne = RealEstatesList.Where(x => x.RealEstateID == xRealEstate.RealEstateID).FirstOrDefault();
-                        Specification specification = new Specification(ifAdmin, RealEstateSelectedOne);
+                        Specification specification = new Specification(false, RealEstateSelectedOne);
                         specification.Show();
                     }
                 }
@@ -185,65 +169,6 @@ namespace RealEstateProject
                 MessageBox.Show("Należy wybrać przynajmniej jedną preferencję.");
         }
 
-        private void ButtonShowUserFilteres_Click(object sender, RoutedEventArgs e)
-        {
-            //do zrobienia
-        }
-
-        //filtry
-        private double ReturnLowerPrice()
-        {
-            double lowerPrice = 0;
-            try
-            {
-                lowerPrice = Convert.ToDouble(TextBoxPriceFrom.Text);
-            }
-            catch (FormatException)
-            {
-                TextBoxPriceFrom.Text = "0";
-            }
-            return lowerPrice;
-        }
-        private double ReturnHigherPrice()
-        {
-            double higherPrice = 10000000;
-            try
-            {
-                higherPrice = Convert.ToDouble(TextBoxPriceTo.Text);
-            }
-            catch (FormatException)
-            {
-                TextBoxPriceTo.Text = "10000000";
-            }
-
-            return higherPrice;
-        }
-        private double ReturnSmallerArea()
-        {
-            double smallerArea = 0;
-            try
-            {
-                smallerArea = Convert.ToDouble(TextBoxAreaFrom.Text);
-            }
-            catch (FormatException)
-            {
-                TextBoxAreaFrom.Text = "0";
-            }
-            return smallerArea;
-        }
-        private double ReturnBiggerArea()
-        {
-            double biggerArea = 10000;
-            try
-            {
-                biggerArea = Convert.ToDouble(TextBoxAreaTo.Text);
-            }
-            catch (FormatException)
-            {
-                TextBoxAreaTo.Text = "10000";
-            }
-            return biggerArea;
-        }
 
         private void RefreshListView(List<RealEstate> tempList)
         {
@@ -482,7 +407,7 @@ namespace RealEstateProject
         private void TextBoxAreaFrom_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TextBoxAreaFrom.Text.Length > 0)
-                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Surface >= Int64.Parse(TextBoxAreaFrom.Text)).ToList());
+                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Surface >= Int32.Parse(TextBoxAreaFrom.Text)).ToList());
             else
                 this.RefreshListView(this.RealEstatesListTemp);
         }
@@ -490,7 +415,7 @@ namespace RealEstateProject
         private void TextBoxAreaTo_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TextBoxAreaTo.Text.Length > 0)
-                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Surface <= Int64.Parse(TextBoxAreaTo.Text)).ToList());
+                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Surface <= Int32.Parse(TextBoxAreaTo.Text)).ToList());
             else
                 this.RefreshListView(this.RealEstatesListTemp);
         }
@@ -498,7 +423,7 @@ namespace RealEstateProject
         private void TextBoxPriceFrom_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TextBoxPriceFrom.Text.Length > 0)
-                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Price >= Int64.Parse(TextBoxPriceFrom.Text)).ToList());
+                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Price >= Int32.Parse(TextBoxPriceFrom.Text)).ToList());
             else
                 this.RefreshListView(this.RealEstatesListTemp);
         }
@@ -506,7 +431,7 @@ namespace RealEstateProject
         private void TextBoxPriceTo_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TextBoxPriceTo.Text.Length > 0)
-                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Price <= Int64.Parse(TextBoxPriceTo.Text)).ToList());
+                this.RefreshListView(this.RealEstatesListTemp.Where(x => x.Price <= Int32.Parse(TextBoxPriceTo.Text)).ToList());
             else
                 this.RefreshListView(this.RealEstatesListTemp);
         }
@@ -555,19 +480,60 @@ namespace RealEstateProject
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, this.RealEstatesList);
                 }
+
+                using (Stream stream = File.Open("UsersList.txt", FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, this.UsersList);
+                }
             }
         }
 
+        private void TextBoxPriceSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
-        //Trzeba sprawdzić
-        
-        //private void listviewOferts_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Specification specification = new Specification(CurrentUserID, RealEstatesList);
-        //    specification.Show();
-        //}
+        private void TextBoxRentSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBoxSurfaceSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBoxNumberofFloorsSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBoxHouseAreaSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBoxFloorNumberSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBoxRoomsSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+
+
     }
 
 }
 
-     
