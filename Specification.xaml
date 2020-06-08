@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RealEstateProject"
         mc:Ignorable="d"
-        Closing="DataWindow_Closing" 
         WindowStartupLocation="CenterScreen"
         Title="Specification" MinHeight="600" MinWidth="900">
     <Grid>
@@ -29,37 +28,9 @@
         </Grid.ColumnDefinitions>
         
         <!--Rodzaj-->
-        <TextBlock x:Name="TextBlockType" Grid.Row="0" Grid.Column="0" Text="Rodzaj:"/>
-        <TextBlock x:Name="TextBlockTypeSpecification" Grid.Row="0" Grid.Column="1" Text="Binding:"/>
-        <!--Miasto-->
-        <TextBlock x:Name="TextBlockCity" Grid.Row="1" Grid.Column="0" Text="Miasto:"/>
-        <TextBlock x:Name="TextBlockCitySpecification" Grid.Row="1" Grid.Column="1" Text="Binding:"/>
-        <!--Cena-->
-        <TextBlock x:Name="TextBlockPrice" Grid.Row="2" Grid.Column="0" Text="Cena:"/>
-        <TextBlock x:Name="TextBlockPriceSpecification" Grid.Row="2" Grid.Column="1" Text="Binding:"/>
-        <!--Czynsz-->
-        <TextBlock x:Name="TextBlockRent" Grid.Row="3" Grid.Column="0" Text="Czynsz:"/>
-        <TextBlock x:Name="TextBlockRentSpecification" Grid.Row="3" Grid.Column="1" Text="Binding:"/>
-        <!--Rynek-->
-        <TextBlock x:Name="TextBlockMarket" Grid.Row="4" Grid.Column="0" Text="Rynek:"/>
-        <TextBlock x:Name="TextBlockMarketSpecification" Grid.Row="4" Grid.Column="1" Text="Binding:"/>
-        <!--Powierzchnia-->
-        <TextBlock x:Name="TextBlockSurface" Grid.Row="5" Grid.Column="0" Text="Powierzchnia:"/>
-        <TextBlock x:Name="TextBlockSurfaceSpecification" Grid.Row="5" Grid.Column="1" Text="Binding:"/>
-        <!--Piętra-->
-        <TextBlock x:Name="TextBlockFloors" Grid.Row="6" Grid.Column="0" Text="Piętro:"/>
-        <TextBlock x:Name="TextBlockFloorsSpecification" Grid.Row="6" Grid.Column="1" Text="Binding:"/>
-        <!--Szczegóły-->
-        <TextBlock x:Name="TextBlockDetails" Grid.Row="7" Grid.Column="0" Text="Szczegóły:"/>
-        <TextBlock x:Name="TextBlockDetailsSpecification" Grid.Row="7" Grid.Column="1" Text="Binding:"/>
-        <!--Pokoje-->
-        <TextBlock x:Name="TextBlockRooms" Grid.Row="8" Grid.Column="0" Text="Ilość pokoi:"/>
-        <TextBlock x:Name="TextBlockRoomsSpecification" Grid.Row="8" Grid.Column="1" Text="Binding:"/>
-        
-        <!--Dla admina-->
-
-        <!--Rodzaj-->
-        <StackPanel x:Name="StackPanelType" Grid.Row="0" Grid.Column="2">
+        <TextBlock x:Name="TextBlockType" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Rodzaj:"/>
+        <TextBlock x:Name="TextBlockTypeSpecification" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Type}"/>
+        <StackPanel x:Name="StackPanelType" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center">
             <ComboBox x:Name="ComboBoxType">
                 <ComboBoxItem Content="Dom"/>
                 <ComboBoxItem Content="Mieszkanie"/>
@@ -67,7 +38,9 @@
             </ComboBox>
         </StackPanel>
         <!--Miasto-->
-        <StackPanel x:Name="StackPanelCity" Grid.Row="1" Grid.Column="2">
+        <TextBlock x:Name="TextBlockCity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Miasto:"/>
+        <TextBlock x:Name="TextBlockCitySpecification" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Text="{Binding City}"/>
+        <StackPanel x:Name="StackPanelCity" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center">
             <ComboBox x:Name="ComboBoxCity">
                 <ComboBoxItem Content="Białystok"/>
                 <ComboBoxItem Content="Moskwa"/>
@@ -75,36 +48,85 @@
             </ComboBox>
         </StackPanel>
         <!--Cena-->
-        <TextBox x:Name="TextBoxPriceSelect" Grid.Row="2" Grid.Column="2"/>
+        <TextBlock x:Name="TextBlockPrice" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Cena:"/>
+        <TextBlock x:Name="TextBlockPriceSpecification" Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Price}"/>
+        <TextBox x:Name="TextBoxPriceSelect" Grid.Row="2" Grid.Column="1" Margin="0 0 0 5"/>
         <!--Czynsz-->
-        <TextBox x:Name="TextBoxRentSelect" Grid.Row="3" Grid.Column="2"/>
+        <TextBlock x:Name="TextBlockRent" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Czynsz:"/>
+        <TextBlock x:Name="TextBlockRentSpecification" Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Rent}"/>
+        <TextBox x:Name="TextBoxRentSelect" Grid.Row="3" Grid.Column="1" Margin="0 0 0 5"/>
         <!--Rynek-->
-        <StackPanel x:Name="StackPanelMarket" Grid.Row="4" Grid.Column="2">
+        <TextBlock x:Name="TextBlockMarket" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Rynek:"/>
+        <TextBlock x:Name="TextBlockMarketSpecification" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Market}"/>
+        <StackPanel x:Name="StackPanelMarket" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
             <ComboBox x:Name="ComboBoxMarket">
                 <ComboBoxItem Content="Pierwotny"/>
                 <ComboBoxItem Content="Wtórny"/>
             </ComboBox>
         </StackPanel>
         <!--Powierzchnia-->
-        <TextBox x:Name="TextBoxSurfaceSelect" Grid.Row="5" Grid.Column="2"/>
-        <!--Piętra-->
-        <TextBox x:Name="TextBoxFloorsSelect" Grid.Row="6" Grid.Column="2"/>
-        <!--Szczegóły-->
-        <StackPanel x:Name="StackPanelDetails" Grid.Row="7" Grid.Column="2">
-            <ComboBox x:Name="ComboBoxDetails">
+        <TextBlock x:Name="TextBlockSurface" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Powierzchnia:"/>
+        <TextBlock x:Name="TextBlockSurfaceSpecification" Grid.Row="5" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Surface}"/>
+        <TextBox x:Name="TextBoxSurfaceSelect" Grid.Row="5" Grid.Column="1" Margin="0 0 0 5"/>
+        
+        
+        
+        <!--Piec-->
+        <TextBlock x:Name="TextBlockTypeOfOven" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Piec:"/>
+        <TextBlock x:Name="TextBlockTypeOfOvenSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding TypeOfOven}"/>
+        <StackPanel x:Name="StackPanelTypeOfOven" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">
+            <ComboBox x:Name="ComboBoxTypeOfOven">
                 <ComboBoxItem Content="Piec węglowy"/>
                 <ComboBoxItem Content="Piec elektryczny"/>
                 <ComboBoxItem Content="Piec na pellet"/>
             </ComboBox>
         </StackPanel>
+        <!--Piętra dla domu-->
+        <TextBlock x:Name="TextBlockNumberofFloors" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Text="Piętro:"/>
+        <TextBlock x:Name="TextBlockNumberofFloorsSpecification" Grid.Row="7" VerticalAlignment="Center" Grid.Column="1" Text="{Binding NumberOfFloors}"/>
+        <TextBox x:Name="TextBoxNumberofFloorsSelect" Grid.Row="7" Grid.Column="1" Margin="0 0 0 5"/>        
+        <!--Powierzchnia domu-->
+        <TextBlock x:Name="TextBlockHouseArea" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="Powierzchnia:"/>
+        <TextBlock x:Name="TextBlockHouseAreaSpecification" Grid.Row="8" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Area}"/>
+        <TextBox x:Name="TextBoxHouseAreaSelect" Grid.Row="8" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!--rodzaj mieszkania-->
+        <TextBlock x:Name="TextBlockFlatStandards" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Typ mieszkania:"/>
+        <TextBlock x:Name="TextBlockFlatStandardsSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding FlatStandards}"/>
+        <StackPanel x:Name="StackPanelFlatStandards" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">
+            <ComboBox x:Name="ComboBoxFlatStandards">
+                <ComboBoxItem Content="Apartament"/>
+                <ComboBoxItem Content="Mieszkanie klasy średniej"/>
+                <ComboBoxItem Content="Mieszkanie komunalne"/>
+            </ComboBox>
+        </StackPanel>
+        <!--numer piętra mieszkania-->
+        <TextBlock x:Name="TextBlockFloorNumber" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Text="Piętro:"/>
+        <TextBlock x:Name="TextBlockFloorNumberSpecification" Grid.Row="7" VerticalAlignment="Center" Grid.Column="1" Text="{Binding FloorNumber}"/>
+        <TextBox x:Name="TextBoxFloorNumberSelect" Grid.Row="7" Grid.Column="1" Margin="0 0 0 5"/>
         <!--Pokoje-->
-        <TextBox x:Name="TextBoxRoomsSelect" Grid.Row="8" Grid.Column="2"/>
+        <TextBlock x:Name="TextBlockRooms" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="Ilość pokoi:"/>
+        <TextBlock x:Name="TextBlockRoomsSpecification" Grid.Row="8" VerticalAlignment="Center" Grid.Column="1" Text="{Binding RoomsNumber}"/>
+        <TextBox x:Name="TextBoxRoomsSelect" Grid.Row="8" Grid.Column="1" Margin="0 0 0 5"/>
         
+        <!--rodzaj działki-->
+        <TextBlock x:Name="TextBlockPlotTypes" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Typ działki:"/>
+        <TextBlock x:Name="TextBlockPlotTypesSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding PlotTypes}"/>
+        <StackPanel x:Name="StackPanelPlotTypes" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center">
+            <ComboBox x:Name="ComboBoxPlotTypes">
+                <ComboBoxItem Content="Działka budowlana"/>
+                <ComboBoxItem Content="Działka leśna"/>
+                <ComboBoxItem Content="Działka letniskowa"/>
+            </ComboBox>
+        </StackPanel>
+        
+
+
         <!--Wróć do menu-->
-        <Button x:Name="ButtonBackToMainMenu" Grid.Row="9" Grid.Column="0" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 5" Content="Wróć do menu" Click="ButtonBackToMainMenu_Click"/>
+        <Button x:Name="ButtonBackToMainMenu" Grid.Row="9" Grid.Column="0" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 10" Content="Wróć do menu" Click="ButtonBackToMainMenu_Click"/>
         <!--Usuń - dla admina-->
-        <Button x:Name="ButtonDeleteProduct" Grid.Row="9" Grid.Column="1" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 5" Content="Usuń" Click="ButtonDeleteProduct_Click"/>
+        <Button x:Name="ButtonDeleteProduct" Grid.Row="9" Grid.Column="1" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 10" Content="Usuń" Click="ButtonDeleteProduct_Click"/>
         <!--Dodaj - dla admina-->
-        <Button x:Name="ButtonAddProduct" Grid.Row="9" Grid.Column="2" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 5" Content="Dodaj" Click="ButtonAddProduct_Click"/>
+        <Button x:Name="ButtonAddProduct" Grid.Row="9" Grid.Column="2" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 10" Content="Dodaj" Click="ButtonAddProduct_Click"/>
     </Grid>
 </Window>

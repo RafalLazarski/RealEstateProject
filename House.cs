@@ -19,8 +19,7 @@ namespace RealEstateProject
         public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent)
             : base(rent)
         {
-            this.RealEstateID = RealEstate.RealEstateCount;
-            RealEstate.RealEstateCount++;
+            this.RealEstateID = housePlot.RealEstateID;
             this.HousePlot = housePlot;
             this.NumberOfFloors = numberOfFloors;
             this.Area = area;
@@ -48,6 +47,11 @@ namespace RealEstateProject
             PelletStove,
             ElectricStove,
             CoalFurnace
+        }
+
+        public override string ToString()
+        {
+            return Convert.ToString(RealEstateID);
         }
     }
 }

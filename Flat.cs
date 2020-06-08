@@ -43,5 +43,10 @@ namespace RealEstateProject
             AverageFlat,
             Apartment
         }
+
+        public override string ToString()
+        {
+            return Convert.ToString(RealEstateID);
+        }
     }
 }

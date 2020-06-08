@@ -117,6 +117,11 @@ namespace RealEstateProject
             this.textblockCurrentUserName.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Name;
             this.textblockCurrentUserSurname.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Surname;
             this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
+
+            if(CurrentUserID != 0)
+            {
+                ButtonAddState.Content = "Zobacz szczegóły";
+            }
         }
 
         #endregion
@@ -125,14 +130,45 @@ namespace RealEstateProject
 
 
         //Do przycisków
-        private void ButtonUseFiltres_Click(object sender, RoutedEventArgs e)
-        {
-            //this.ShowRealEstateList(this.CheckHome, this.CheckPlate, this.CheckFlat, this.CheckBialystok, this.CheckMoscow, this.CheckBuenosAires, this.CheckPrimary, this.CheckSecondary);
-        }
+        //private void ButtonUseFiltres_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //this.ShowRealEstateList(this.CheckHome, this.CheckPlate, this.CheckFlat, this.CheckBialystok, this.CheckMoscow, this.CheckBuenosAires, this.CheckPrimary, this.CheckSecondary);
+        //}
 
         private void ButtonAddState_Click(object sender, RoutedEventArgs e)
         {
-            //do zrobienia
+            bool ifAdmin = false;
+            if(CurrentUserID == 1)
+            {
+                ifAdmin = true;
+            }
+
+            if (listviewOferts.SelectedItem == null)
+            {
+                if(ifAdmin)
+                {
+                    MessageBox.Show("Dodawanie nieruchomości przez admina");
+                }
+                else
+                {
+                    MessageBox.Show("Proszę najpierw zaznaczyć konkretną nieruchomość!");
+                }
+                
+            }
+            else
+            {
+                foreach (RealEstate xRealEstate in RealEstatesList)
+                {
+
+                    if (xRealEstate.RealEstateID.ToString().Equals(listviewOferts.SelectedItem.ToString()))
+                    {
+                        RealEstate RealEstateSelectedOne = RealEstatesList.Where(x => x.RealEstateID == xRealEstate.RealEstateID).FirstOrDefault();
+                        Specification specification = new Specification(ifAdmin, RealEstateSelectedOne);
+                        specification.Show();
+                    }
+                }
+            }
+
         }
         private void ButtonSaveUserFilteres_Click(object sender, RoutedEventArgs e)
         {
@@ -522,11 +558,14 @@ namespace RealEstateProject
             }
         }
 
-        //Trzeba sprawdzić
-        private void listviewOferts_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
+        //Trzeba sprawdzić
+        
+        //private void listviewOferts_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Specification specification = new Specification(CurrentUserID, RealEstatesList);
+        //    specification.Show();
+        //}
     }
 
 }

@@ -39,5 +39,10 @@ namespace RealEstateProject
             SummerPlot,
             BuildingPlot
         }
+
+        public override string ToString()
+        {
+            return Convert.ToString(RealEstateID);
+        }
     }
 }

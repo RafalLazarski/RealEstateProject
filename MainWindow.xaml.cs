@@ -67,14 +67,16 @@ namespace RealEstateProject
                 {
                     this.Hide();
                     MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
+                    
                     menu.ButtonLogoutClick += (_sender, _e) =>
                     {
                         MessageBox.Show("Pomyślnie wylogowano.");
                         this.Show();
                     };
                     menu.Show();
+                    //Test test = new Test();
+                    //test.Show();
                 }
-
                 else
                     MessageBox.Show("Podano błędne dane logowania.");
             }

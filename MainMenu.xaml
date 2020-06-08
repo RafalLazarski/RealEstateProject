@@ -27,10 +27,10 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Produkty-->
-                    <ListView Margin="10" x:Name="listviewOferts" Hyperlink.Click="listviewOferts_Click" Grid.Row="2" Grid.ColumnSpan="6">
+                    <ListView Margin="10" x:Name="listviewOferts" Grid.Row="2" Grid.ColumnSpan="6">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Rodzaj:" x:Name="EstateType" Width="150" DisplayMemberBinding="{Binding Type}" />
+                                <GridViewColumn Header="Rodzaj:" x:Name="EstateType" Width="150" DisplayMemberBinding="{Binding Type}"/>
                                 <GridViewColumn Header="Cena:" x:Name="EstatePrice" Width="150"  DisplayMemberBinding="{Binding Price}" />
                                 <GridViewColumn Header="Powierzchnia:" x:Name="EstateArea" Width="150" DisplayMemberBinding="{Binding Surface}" />
                                 <GridViewColumn Header="Miasto:" x:Name="EstateCity" Width="150" DisplayMemberBinding="{Binding City}" />
@@ -38,6 +38,8 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+
+                    
 
                     <!--Rodzaj nieruchomości-->
                     
@@ -151,16 +153,16 @@
                     
                 </Grid>
             </TabItem>
-            <TabItem Header="Moje konto" Width="300">
+            <TabItem Header="Moje konto">
                 <Grid x:Name="gridmyAccount">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="300" />
-                        <RowDefinition Height="150" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300" />
-                        <ColumnDefinition Width="300" />
-                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid x:Name="gridAccountDetails" Grid.Row="0" Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -170,14 +172,14 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="textblockAccountDetails" Grid.Row="0" Grid.Column="0" Text="Dane Konta" Grid.ColumnSpan="2"/>
-                        <TextBlock x:Name="textblockUserLogin" Grid.Row="1" Grid.Column="0" Text="Login" />
-                        <TextBlock x:Name="textblockUserName" Grid.Row="2" Grid.Column="0" Text="Imię" />
-                        <TextBlock x:Name="textblockUserPassword" Grid.Row="3" Grid.Column="0" Text="Nazwisko" />
+                        <TextBlock x:Name="textblockAccountDetails" Grid.Row="0" Grid.Column="0" Text="Dane Konta:" Grid.ColumnSpan="2"/>
+                        <TextBlock x:Name="textblockUserLogin" Grid.Row="1" Grid.Column="0" Text="Login:" />
+                        <TextBlock x:Name="textblockUserName" Grid.Row="2" Grid.Column="0" Text="Imię:" />
+                        <TextBlock x:Name="textblockUserPassword" Grid.Row="3" Grid.Column="0" Text="Nazwisko:" />
 
                         <TextBlock x:Name="textblockCurrentUserLogin" Grid.Row="1" Grid.Column="1" Text="{Binding Login}"  />
                         <TextBlock x:Name="textblockCurrentUserName" Grid.Row="2" Grid.Column="1" Text="{Binding Name}" />
@@ -196,8 +198,8 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock x:Name="textblockAccountModification" Text="Modyfikacja konta" Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center"/>
@@ -211,7 +213,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Panel administratora" Width="300"/>
+            <TabItem Header="Panel administratora"/>
         </TabControl>
     </Grid>
 </Window>
