@@ -238,9 +238,9 @@
                     <TextBlock x:Name="TextBlockTypeNewRealEstateWindow" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Rodzaj:"/>
                     <StackPanel x:Name="StackPanelTypeNewRealEstateWindow" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center">
                         <ComboBox x:Name="ComboBoxType">
-                            <ComboBoxItem x:Name="ComboBoxItemHouse" Content="Dom"/>
-                            <ComboBoxItem Content="Mieszkanie"/>
-                            <ComboBoxItem Content="Działka"/>
+                            <ComboBoxItem x:Name="ComboBoxItemHouse" Selected="ComboBoxItemHouse_Selected" Content="Dom"/>
+                            <ComboBoxItem x:Name="ComboBoxItemFlat" Selected="ComboBoxItemFlat_Selected" Content="Mieszkanie"/>
+                            <ComboBoxItem Name="ComboBoxItemPlot" Selected="ComboBoxItemPlot_Selected" Content="Działka"/>
                         </ComboBox>
                     </StackPanel>
                     <!--Miasto-->

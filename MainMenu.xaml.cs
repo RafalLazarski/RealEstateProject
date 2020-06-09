@@ -120,12 +120,91 @@ namespace RealEstateProject
             this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
         }
 
+        private void ComboBoxItemHouse_Selected(object sender, RoutedEventArgs e)
+        {
+            SetTextBlocks();
+        }
+
+        private void ComboBoxItemFlat_Selected(object sender, RoutedEventArgs e)
+        {
+            SetTextBlocks();
+        }
+
+        private void ComboBoxItemPlot_Selected(object sender, RoutedEventArgs e)
+        {
+            SetTextBlocks();
+        }
+
         private void SetTextBlocks()
         {
-            //if(ComboBoxItemHouse.IsSelected)
-            //{
-            //    MessageBox.Show("Działa");
-            //}
+            if (!ComboBoxItemHouse.IsSelected && !ComboBoxItemFlat.IsSelected && !ComboBoxItemPlot.IsSelected)
+            {
+                TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockNumberofFloorsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxNumberofFloorsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockHouseAreaNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxHouseAreaSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFloorNumberNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxFloorNumberSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxRoomsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+            }
+            else if (ComboBoxItemHouse.IsSelected)
+            {
+                TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Visible;
+                StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBlockNumberofFloorsNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBoxNumberofFloorsSelectNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBlockHouseAreaNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBoxHouseAreaSelectNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBlockFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFloorNumberNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxFloorNumberSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxRoomsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+            }
+            else if (ComboBoxItemFlat.IsSelected)
+            {
+                TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockNumberofFloorsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxNumberofFloorsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockHouseAreaNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxHouseAreaSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFlatStandardsNewRealEstateWindow.Visibility = Visibility.Visible;
+                StackPanelFlatStandardsNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBlockFloorNumberNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBoxFloorNumberSelectNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBoxRoomsSelectNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Visible;
+                TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+            }
+            else if (ComboBoxItemPlot.IsSelected)
+            {
+                TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockNumberofFloorsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxNumberofFloorsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockHouseAreaNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxHouseAreaSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFloorNumberNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxFloorNumberSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxRoomsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Visible;
+                StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion
@@ -531,8 +610,7 @@ namespace RealEstateProject
             e.Handled = regex.IsMatch(e.Text);
         }
 
-
-
+        
     }
 
 }
