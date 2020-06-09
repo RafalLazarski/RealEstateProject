@@ -25,7 +25,7 @@ namespace RealEstateProject
             this.Name = name;
             this.Surname = surname;
             this.UserPreferences = userPreferences;
-            UsersCount++;
+            ++UsersCount;
         }
 
     }

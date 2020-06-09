@@ -35,11 +35,19 @@ namespace RealEstateProject
 
         private void ImportUsersList()
         {
+            
             using (Stream stream = File.Open("UsersList.txt", FileMode.Open))
             {
-                BinaryFormatter bin = new BinaryFormatter();
-                var users = (List<User>)bin.Deserialize(stream);
-                users.ForEach(x => this.UsersList.Add(x));
+                if (new FileInfo("UsersList.txt").Length != 0)
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    var users = (List<User>)bin.Deserialize(stream);
+                    users.ForEach(x => this.UsersList.Add(x));
+                    User.UsersCount = this.UsersList.Count();
+                }
+                
+
+                
             }
         }
 

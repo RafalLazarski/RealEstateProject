@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,6 +39,7 @@ namespace RealEstateProject
             else
             {
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
+                ButtonReservation.SetValue(Grid.ColumnProperty, 1);
             }
 
             string typeOfSelectedRealEstate = realEstate.Type.ToString();
@@ -86,7 +89,11 @@ namespace RealEstateProject
 
         private void ButtonDeleteProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            //using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
+            //{
+            //    BinaryFormatter bin = new BinaryFormatter();
+            //    bin.Serialize(stream, this.RealEstatesList);
+            //}
         }
 
         private void ButtonReservation_Click(object sender, RoutedEventArgs e)
