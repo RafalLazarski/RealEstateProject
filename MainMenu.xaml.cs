@@ -56,6 +56,7 @@ namespace RealEstateProject
             this.SetTextBlocks();
             this.ImportRealEstatesList();
             this.ChangeCheckboxesSelection();
+
         }
 
         #endregion
@@ -66,9 +67,13 @@ namespace RealEstateProject
         {
             using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Open))
             {
-                BinaryFormatter bin = new BinaryFormatter();
-                var realEstates = (List<RealEstate>)bin.Deserialize(stream);
-                realEstates.ForEach(x => this.RealEstatesList.Add(x));
+                if (new FileInfo("RealEstatesList.txt").Length != 0)
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    var realEstates = (List<RealEstate>)bin.Deserialize(stream);
+                    realEstates.ForEach(x => this.RealEstatesList.Add(x));
+                    RealEstate.RealEstateCount = this.RealEstatesList.Count();
+                }                
             }
             this.RefreshListView();
         }
@@ -118,6 +123,8 @@ namespace RealEstateProject
             this.textblockCurrentUserName.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Name;
             this.textblockCurrentUserSurname.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Surname;
             this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
+            if (this.CurrentUserID != 1)
+                this.tabItemPanelAdmin.Visibility = Visibility.Collapsed;
         }
 
         private void ComboBoxItemHouse_Selected(object sender, RoutedEventArgs e)
@@ -226,7 +233,7 @@ namespace RealEstateProject
                     if (xRealEstate.RealEstateID.ToString().Equals(listviewOferts.SelectedItem.ToString()))
                     {
                         RealEstate RealEstateSelectedOne = RealEstatesList.Where(x => x.RealEstateID == xRealEstate.RealEstateID).FirstOrDefault();
-                        Specification specification = new Specification(false, RealEstateSelectedOne);
+                        Specification specification = new Specification(this.CurrentUserID, RealEstateSelectedOne);
                         specification.Show();
                     }
                 }
@@ -472,12 +479,38 @@ namespace RealEstateProject
             this.IsPasswordChanging = true;
         }
 
+        private void ButtonAddRealEstate_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (this.ComboBoxCity.SelectedItem != null && this.TextBoxPriceSelectNewRealEstateWindow.Text != null
+                && this.TextBoxSurfaceSelectNewRealEstateWindow.Text != null && this.ComboBoxMarket.SelectedItem != null
+                && this.ComboBoxType.SelectedItem != null && ((this.ComboBoxTypeOfOven.SelectedItem != null
+                && this.TextBoxNumberofFloorsSelectNewRealEstateWindow.Text != null && this.TextBoxHouseAreaSelectNewRealEstateWindow.Text != null)
+                || (this.ComboBoxFlatStandards.SelectedItem != null && this.TextBoxFloorNumberSelectNewRealEstateWindow.Text != null
+                && this.TextBoxRoomsSelectNewRealEstateWindow.Text != null) || this.ComboBoxPlotTypes.SelectedItem != null))
+            {
+
+                //if (this.ComboBoxFlatStandards.Visibility == Visibility.Visible)
+                //    this.RealEstatesList.Add(new Flat(Int32.Parse(this.TextBoxFloorNumberSelectNewRealEstateWindow.Text),
+                //        Int32.Parse(this.TextBoxRoomsSelectNewRealEstateWindow.Text), this.ComboBoxFlatStandards.SelectedItem,
+                //        Int32.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text), Int32.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text),
+                //        (Cities)this.ComboBoxCity.SelectedItem, Int32.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text), (Markets)this.ComboBoxMarket.SelectedItem));
+                //this.RefreshListView();
+            }
+            else
+                MessageBox.Show("Należy uzupełnić wszystkie pola.");
+        }
+
         #endregion
 
 
 
         private void ButtonLogout_Click(object sender, RoutedEventArgs e)
         {
+            using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(stream, this.RealEstatesList);
+            }
             this.Close();
             RoutedEventArgs routedEventArgs = new RoutedEventArgs();
             ButtonLogoutClick(this, routedEventArgs);

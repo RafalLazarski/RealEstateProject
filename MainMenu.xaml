@@ -214,7 +214,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Panel administratora">
+            <TabItem Header="Panel administratora" x:Name="tabItemPanelAdmin">
                 <Grid x:Name="gridAdminPanel">
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="40"/>
@@ -313,6 +313,8 @@
                             <ComboBoxItem Content="Działka letniskowa"/>
                         </ComboBox>
                     </StackPanel>
+
+                    <Button x:Name="buttonAddRealEstate" Grid.Row="9" Grid.Column="0" Content="Dodaj nieruchomość" Click="ButtonAddRealEstate_OnClick" />
 
 
                 </Grid>

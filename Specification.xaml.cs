@@ -21,27 +21,24 @@ namespace RealEstateProject
     /// </summary>
     public partial class Specification : Window
     {
-        public Specification(bool ifAdminCheck, RealEstate realEstate)
+        public Specification(int userID, RealEstate realEstate)
         {
             InitializeComponent();
             this.DataContext = realEstate;
-            SetTextBlocks(realEstate, ifAdminCheck);
-            
+            this.SetTextBlocks(userID, realEstate);           
         }
 
-        private void SetTextBlocks(RealEstate realEstate, bool adminStatus)
+        private void SetTextBlocks(int userID, RealEstate realEstate)
         {
             
-            if(adminStatus)
-            {
+            if(userID == 1)
                 ButtonReservation.Visibility = Visibility.Collapsed;
-            }
             else
             {
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
                 ButtonReservation.SetValue(Grid.ColumnProperty, 1);
             }
-
+                
             string typeOfSelectedRealEstate = realEstate.Type.ToString();
             switch (typeOfSelectedRealEstate)
             {

@@ -44,10 +44,7 @@ namespace RealEstateProject
                     var users = (List<User>)bin.Deserialize(stream);
                     users.ForEach(x => this.UsersList.Add(x));
                     User.UsersCount = this.UsersList.Count();
-                }
-                
-
-                
+                }                             
             }
         }
 

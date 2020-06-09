@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static RealEstateProject.RealEstate;
 
 namespace RealEstateProject
 {
     [Serializable]
     public class UserPreferences
     {
-        public List<RealEstate.Types> FavouriteTypes { get; set; }
-        //public string FavouritePrice { get; set; }
-        public List<RealEstate.Cities> FavouriteCities { get; set; }
-        public List<RealEstate.Markets> FavouriteMarkets { get; set; }
-        //public string FavouriteSurface { get; set; }
+        public List<Types> FavouriteTypes { get; set; }
+        public List<Cities> FavouriteCities { get; set; }
+        public List<Markets> FavouriteMarkets { get; set; }
 
-        public UserPreferences(List<RealEstate.Types> favouriteTypes, List<RealEstate.Cities> favouriteCities, List<RealEstate.Markets> favouriteMarkets)
+        public UserPreferences(List<Types> favouriteTypes, List<Cities> favouriteCities, List<Markets> favouriteMarkets)
         {
             this.FavouriteCities = favouriteCities;
             this.FavouriteMarkets = favouriteMarkets;
