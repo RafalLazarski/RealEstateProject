@@ -153,6 +153,8 @@ namespace RealEstateProject
                 TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                buttonAddRealEstate.SetValue(Grid.RowProperty, 6);
+                buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 2);
             }
             else if (ComboBoxItemHouse.IsSelected)
             {
@@ -170,6 +172,8 @@ namespace RealEstateProject
                 TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                buttonAddRealEstate.SetValue(Grid.RowProperty, 9);
+                buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 1);
             }
             else if (ComboBoxItemFlat.IsSelected)
             {
@@ -187,6 +191,8 @@ namespace RealEstateProject
                 TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Visible;
                 TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                buttonAddRealEstate.SetValue(Grid.RowProperty, 9);
+                buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 1);
             }
             else if (ComboBoxItemPlot.IsSelected)
             {
@@ -204,6 +210,8 @@ namespace RealEstateProject
                 TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Visible;
                 StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Visible;
+                buttonAddRealEstate.SetValue(Grid.RowProperty, 7);
+                buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 2);
             }
         }
 
@@ -226,13 +234,17 @@ namespace RealEstateProject
                     if (xRealEstate.RealEstateID.ToString().Equals(listviewOferts.SelectedItem.ToString()))
                     {
                         RealEstate RealEstateSelectedOne = RealEstatesList.Where(x => x.RealEstateID == xRealEstate.RealEstateID).FirstOrDefault();
-                        Specification specification = new Specification(false, RealEstateSelectedOne);
+                        Specification specification = new Specification(this.CurrentUserID, RealEstateSelectedOne, RealEstatesList);
                         specification.Show();
+                        specification.ButtonDeleteItemClick += (_sender, _e) =>
+                        {
+                            this.RefreshListView();
+                        };
                     }
                 }
             }
-
         }
+
         private void ButtonSaveUserFilteres_Click(object sender, RoutedEventArgs e)
         {
             if (this.FavouriteCitiesListtemp.Any() ||
@@ -260,6 +272,8 @@ namespace RealEstateProject
             this.listviewOferts.ItemsSource = null;
             this.listviewOferts.ItemsSource = this.RealEstatesListTemp;
         }
+
+        
 
         //checkboxy
         private void CheckBoxTypeHome_Unchecked(object sender, RoutedEventArgs e)
@@ -407,82 +421,6 @@ namespace RealEstateProject
             this.RefreshListView();
         }
 
-
-        #endregion
-
-        #region Change Login/Password Events
-
-        private void ButtonChangeData_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.textboxChangeData.Text != null)
-            {
-                if (this.IsLoginChanging)
-                {
-                    this.IsLoginChanging = false;
-                    this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Login = this.textboxChangeData.Text;
-                    this.textblockCurrentUserLogin.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Login;
-                    MessageBox.Show("Pomyślnie zmieniono login.");
-                }
-
-                else if (this.IsPasswordChanging)
-                {
-                    this.IsPasswordChanging = false;
-                    this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Password = this.textboxChangeData.Text;
-                }
-
-                this.textblockChangeData.Visibility = Visibility.Collapsed;
-                this.textboxChangeData.Visibility = Visibility.Collapsed;
-                this.buttonChangeData.Visibility = Visibility.Collapsed;
-                this.buttonChangeUserLogin.Visibility = Visibility.Visible;
-                this.buttonChangeUserPassword.Visibility = Visibility.Visible;
-                MessageBox.Show("Pomyślnie zmieniono hasło.");
-            }
-
-            else
-            {
-                if (this.IsLoginChanging)
-                    MessageBox.Show("Najpierw wprowadź nowy login");
-                else if (this.IsPasswordChanging)
-                    MessageBox.Show("Najpierw wprowadź nowe hasło");
-            }
-        }
-
-
-        private void ButtonChangeUserLogin_Click(object sender, RoutedEventArgs e)
-        {
-            this.textblockChangeData.Visibility = Visibility.Visible;
-            this.textboxChangeData.Visibility = Visibility.Visible;
-            this.buttonChangeData.Visibility = Visibility.Visible;
-            this.buttonChangeUserLogin.Visibility = Visibility.Collapsed;
-            this.buttonChangeUserPassword.Visibility = Visibility.Collapsed;
-            this.buttonChangeData.Content = "Zmień login.";
-            this.textblockChangeData.Text = "Wprowadź nowy login";
-            this.IsLoginChanging = true;
-        }
-
-        private void ButtonChangeUserPassword_Click(object sender, RoutedEventArgs e)
-        {
-            this.textblockChangeData.Visibility = Visibility.Visible;
-            this.textboxChangeData.Visibility = Visibility.Visible;
-            this.buttonChangeData.Visibility = Visibility.Visible;
-            this.buttonChangeUserLogin.Visibility = Visibility.Collapsed;
-            this.buttonChangeUserPassword.Visibility = Visibility.Collapsed;
-            this.buttonChangeData.Content = "Zmień hasło.";
-            this.textblockChangeData.Text = "Wprowadź nowe hasło";
-            this.IsPasswordChanging = true;
-        }
-
-        #endregion
-
-
-
-        private void ButtonLogout_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            RoutedEventArgs routedEventArgs = new RoutedEventArgs();
-            ButtonLogoutClick(this, routedEventArgs);
-        }
-
         private void TextBoxAreaFrom_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TextBoxAreaFrom.Text.Length > 0)
@@ -539,6 +477,48 @@ namespace RealEstateProject
             e.Handled = regex.IsMatch(e.Text);
         }
 
+
+        #endregion
+
+        #region Change Login/Password Events
+
+        private void ButtonChangeUserLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.textboxChangeDataLogin.Text.Length > 2)
+            {
+                this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Login = this.textboxChangeDataLogin.Text;
+                this.textblockCurrentUserLogin.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Login;
+                MessageBox.Show("Pomyślnie zmieniono login");
+            }
+            else
+            {
+                MessageBox.Show("Nowy login musi mieć przynajmniej 3 znaki!");
+            }
+        }
+
+        private void ButtonChangeUserPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.PasswordBoxChangeData.Password.Length > 2)
+            {
+                this.IsPasswordChanging = false;
+                this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Password = this.PasswordBoxChangeData.Password;
+                MessageBox.Show("Pomyślnie zmieniono hasło");
+            }
+            else
+            {
+                MessageBox.Show("Nowe hasło musi mieć przynajmniej 3 znaki!");
+            }
+        }
+
+        
+
+        private void ButtonLogout_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs();
+            ButtonLogoutClick(this, routedEventArgs);
+        }
+
         private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
             string msg = "Czy na pewno chcesz zamknąć aplikację?";
@@ -566,6 +546,31 @@ namespace RealEstateProject
                     bin.Serialize(stream, this.UsersList);
                 }
             }
+        }
+
+        #endregion
+
+        #region Admin
+
+        private void buttonAddRealEstate_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ComboBoxCity.SelectedItem != null && this.TextBoxPriceSelectNewRealEstateWindow.Text != null
+                && this.TextBoxSurfaceSelectNewRealEstateWindow.Text != null && this.ComboBoxMarket.SelectedItem != null
+                && this.ComboBoxType.SelectedItem != null && ((this.ComboBoxTypeOfOven.SelectedItem != null
+                && this.TextBoxNumberofFloorsSelectNewRealEstateWindow.Text != null && this.TextBoxHouseAreaSelectNewRealEstateWindow.Text != null)
+                || (this.ComboBoxFlatStandards.SelectedItem != null && this.TextBoxFloorNumberSelectNewRealEstateWindow.Text != null
+                && this.TextBoxRoomsSelectNewRealEstateWindow.Text != null) || this.ComboBoxPlotTypes.SelectedItem != null))
+            {
+                MessageBox.Show("uzupełnione legitnie");
+                //if (this.ComboBoxFlatStandards.Visibility == Visibility.Visible)
+                //    this.RealEstatesList.Add(new Flat(Int32.Parse(this.TextBoxFloorNumberSelectNewRealEstateWindow.Text),
+                //        Int32.Parse(this.TextBoxRoomsSelectNewRealEstateWindow.Text), this.ComboBoxFlatStandards.SelectedItem,
+                //        Int32.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text), Int32.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text),
+                //        (Cities)this.ComboBoxCity.SelectedItem, Int32.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text), (Markets)this.ComboBoxMarket.SelectedItem));
+                //this.RefreshListView();
+            }
+            else
+                MessageBox.Show("Należy uzupełnić wszystkie pola.");
         }
 
         private void TextBoxPriceSelectNewRealEstateWindow_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -610,7 +615,28 @@ namespace RealEstateProject
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        
+        private void RefreshListViewAdmin()
+        {
+            this.listviewOferts.ItemsSource = null;
+            this.listviewOferts.ItemsSource = this.RealEstatesList;
+        }
+
+        private void RefreshListViewCustomer(int adminStatus)
+        {
+            this.listviewOferts.ItemsSource = null;
+            if (adminStatus == 1)
+            {
+                this.listviewOferts.ItemsSource = this.RealEstatesList; //powinna być oddzielna lista ze sprzedanymi już produktami - pełen widok dla administratora
+            }
+            else
+            {
+                this.listviewOferts.ItemsSource = this.RealEstatesList; // - kupione nieruchomości przez użytkownika
+            }
+        }
+
+        #endregion
+
+
     }
 
 }

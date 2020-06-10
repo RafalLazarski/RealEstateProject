@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RealEstateProject"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Specification" MinHeight="600" MinWidth="900">
+        Title="Specification" MinHeight="460" MaxHeight="460" MinWidth="300" MaxWidth="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="40"/>
@@ -18,67 +18,70 @@
             <RowDefinition MaxHeight="40"/>
             <RowDefinition MaxHeight="40"/>
             <RowDefinition MaxHeight="40"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition MaxHeight="5"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MaxWidth="100"/>
-            <ColumnDefinition MaxWidth="150"/>
-            <ColumnDefinition MaxWidth="150"/>
+            <ColumnDefinition MaxWidth="120"/>
+            <ColumnDefinition MaxWidth="10"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
+        <Border Grid.Row="0" Grid.RowSpan="10" Grid.Column="1" BorderBrush="DodgerBlue" Margin="0 0 0 10" BorderThickness="3 0 0 0"/>
+
         <!--Rodzaj-->
         <TextBlock x:Name="TextBlockType" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Rodzaj:"/>
-        <TextBlock x:Name="TextBlockTypeSpecification" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Type}"/>
+        <TextBlock x:Name="TextBlockTypeSpecification" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Type}"/>
         <!--Miasto-->
         <TextBlock x:Name="TextBlockCity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Miasto:"/>
-        <TextBlock x:Name="TextBlockCitySpecification" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Text="{Binding City}"/>
+        <TextBlock x:Name="TextBlockCitySpecification" Grid.Row="1" VerticalAlignment="Center" Grid.Column="2" Text="{Binding City}"/>
         <!--Cena-->
         <TextBlock x:Name="TextBlockPrice" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Cena:"/>
-        <TextBlock x:Name="TextBlockPriceSpecification" Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Price}"/>
+        <TextBlock x:Name="TextBlockPriceSpecification" Grid.Row="2" VerticalAlignment="Center" Grid.Column="2" Text="{Binding Price}"/>
         <!--Czynsz-->
         <TextBlock x:Name="TextBlockRent" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Czynsz:"/>
-        <TextBlock x:Name="TextBlockRentSpecification" Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Rent}"/>
+        <TextBlock x:Name="TextBlockRentSpecification" Grid.Row="3" VerticalAlignment="Center" Grid.Column="2" Text="{Binding Rent}"/>
         <!--Rynek-->
         <TextBlock x:Name="TextBlockMarket" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Rynek:"/>
-        <TextBlock x:Name="TextBlockMarketSpecification" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Market}"/>
+        <TextBlock x:Name="TextBlockMarketSpecification" Grid.Row="4" VerticalAlignment="Center" Grid.Column="2" Text="{Binding Market}"/>
         <!--Powierzchnia-->
         <TextBlock x:Name="TextBlockSurface" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Powierzchnia:"/>
-        <TextBlock x:Name="TextBlockSurfaceSpecification" Grid.Row="5" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Surface}"/>
+        <TextBlock x:Name="TextBlockSurfaceSpecification" Grid.Row="5" VerticalAlignment="Center" Grid.Column="2" Text="{Binding Surface}"/>
         
         
         
         <!--Piec-->
         <TextBlock x:Name="TextBlockTypeOfOven" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Piec:"/>
-        <TextBlock x:Name="TextBlockTypeOfOvenSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding TypeOfOven}"/>
+        <TextBlock x:Name="TextBlockTypeOfOvenSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="2" Text="{Binding TypeOfOven}"/>
         <!--Piętra dla domu-->
         <TextBlock x:Name="TextBlockNumberofFloors" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Text="Piętro:"/>
-        <TextBlock x:Name="TextBlockNumberofFloorsSpecification" Grid.Row="7" VerticalAlignment="Center" Grid.Column="1" Text="{Binding NumberOfFloors}"/>
+        <TextBlock x:Name="TextBlockNumberofFloorsSpecification" Grid.Row="7" VerticalAlignment="Center" Grid.Column="2" Text="{Binding NumberOfFloors}"/>
         <!--Powierzchnia domu-->
-        <TextBlock x:Name="TextBlockHouseArea" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="Powierzchnia:"/>
-        <TextBlock x:Name="TextBlockHouseAreaSpecification" Grid.Row="8" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Area}"/>
+        <TextBlock x:Name="TextBlockHouseArea" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="Pow. zabudowana:"/>
+        <TextBlock x:Name="TextBlockHouseAreaSpecification" Grid.Row="8" VerticalAlignment="Center" Grid.Column="2" Text="{Binding Area}"/>
 
         <!--rodzaj mieszkania-->
         <TextBlock x:Name="TextBlockFlatStandards" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Typ mieszkania:"/>
-        <TextBlock x:Name="TextBlockFlatStandardsSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding FlatStandards}"/>
+        <TextBlock x:Name="TextBlockFlatStandardsSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="2" Text="{Binding FlatStandard}"/>
         <!--numer piętra mieszkania-->
         <TextBlock x:Name="TextBlockFloorNumber" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Text="Piętro:"/>
-        <TextBlock x:Name="TextBlockFloorNumberSpecification" Grid.Row="7" VerticalAlignment="Center" Grid.Column="1" Text="{Binding FloorNumber}"/>
+        <TextBlock x:Name="TextBlockFloorNumberSpecification" Grid.Row="7" VerticalAlignment="Center" Grid.Column="2" Text="{Binding FloorNumber}"/>
         <!--Pokoje-->
         <TextBlock x:Name="TextBlockRooms" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="Ilość pokoi:"/>
-        <TextBlock x:Name="TextBlockRoomsSpecification" Grid.Row="8" VerticalAlignment="Center" Grid.Column="1" Text="{Binding RoomsNumber}"/>
+        <TextBlock x:Name="TextBlockRoomsSpecification" Grid.Row="8" VerticalAlignment="Center" Grid.Column="2" Text="{Binding RoomsNumber}"/>
         
         <!--rodzaj działki-->
         <TextBlock x:Name="TextBlockPlotTypes" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Typ działki:"/>
-        <TextBlock x:Name="TextBlockPlotTypesSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding PlotTypes}"/>
-        
+        <TextBlock x:Name="TextBlockPlotTypesSpecification" Grid.Row="6" VerticalAlignment="Center" Grid.Column="2" Text="{Binding PlotTypeName}"/>
 
+
+        <Border Grid.Row="9" Grid.ColumnSpan="3" BorderBrush="DodgerBlue" BorderThickness="0 0 0 5"/>
 
         <!--Wróć do menu-->
-        <Button x:Name="ButtonBackToMainMenu" Grid.Row="9" Grid.Column="0" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 10" Content="Wróć do menu" Click="ButtonBackToMainMenu_Click"/>
+        <Button x:Name="ButtonBackToMainMenu" Grid.Row="10" Grid.Column="0" Height="30" Width="100" VerticalAlignment="Top" Margin="0 10" Content="Wróć do menu" Click="ButtonBackToMainMenu_Click"/>
         <!--usuń - dla admina-->
-        <Button x:Name="ButtonDeleteProduct" Grid.Row="9" Grid.Column="1" MaxHeight="30" MaxWidth="90" VerticalAlignment="Top" Margin="0 10" Content="Usuń" Click="ButtonDeleteProduct_Click"/>
+        <Button x:Name="ButtonDeleteProduct" Grid.Row="10" Grid.Column="2" Height="30" Width="100" VerticalAlignment="Top" Margin="5 10" HorizontalAlignment="Left" Content="Usuń" Click="ButtonDeleteProduct_Click"/>
         <!--rezerwacja dla zwykłego użytk.-->
-        <Button x:Name="ButtonReservation" Grid.Row="9" Grid.Column="2" MaxHeight="30" MaxWidth="150" VerticalAlignment="Top" Margin="0 10" Content="Zarezerwuj nieruchomość" Click="ButtonReservation_Click"/>
+        <Button x:Name="ButtonReservation" Grid.Row="10" Grid.Column="2" Height="30" Width="100" VerticalAlignment="Top" Margin="5 10" HorizontalAlignment="Left" Content="Zarezerwuj" Click="ButtonReservation_Click"/>
     </Grid>
 </Window>

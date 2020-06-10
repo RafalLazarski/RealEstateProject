@@ -19,7 +19,8 @@ namespace RealEstateProject
         public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent)
             : base(rent)
         {
-            this.RealEstateID = housePlot.RealEstateID;
+            ++RealEstate.RealEstateCount;
+            this.RealEstateID = RealEstate.RealEstateCount;
             this.HousePlot = housePlot;
             this.NumberOfFloors = numberOfFloors;
             this.Area = area;

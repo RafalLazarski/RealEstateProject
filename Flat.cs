@@ -18,11 +18,11 @@ namespace RealEstateProject
         public Flat(int floorNumber, int roomsNumber, FlatStandards flatStandard, double price, float surface, Cities city, double rent, Markets market)
             : base(price, surface, city, rent, market)
         {
+            ++RealEstate.RealEstateCount;
             this.FloorNumber = floorNumber;
             this.RoomsNumber = roomsNumber;
             this.RealEstateID = RealEstate.RealEstateCount;
-            RealEstate.RealEstateCount++;
-            
+
             switch (flatStandard)
             {
                 case FlatStandards.Apartment:

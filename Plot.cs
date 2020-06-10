@@ -17,8 +17,8 @@ namespace RealEstateProject
         public Plot(PlotTypes plotTypeID, double price, float surface, Cities city, Markets market)
             : base(price, surface, city, market)
         {
+            ++RealEstate.RealEstateCount;
             this.RealEstateID = RealEstate.RealEstateCount;
-            RealEstate.RealEstateCount++;
             switch (plotTypeID)
             {
                 case PlotTypes.BuildingPlot:

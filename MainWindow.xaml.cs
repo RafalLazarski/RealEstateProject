@@ -45,9 +45,6 @@ namespace RealEstateProject
                     users.ForEach(x => this.UsersList.Add(x));
                     User.UsersCount = this.UsersList.Count();
                 }
-                
-
-                
             }
         }
 
@@ -78,7 +75,6 @@ namespace RealEstateProject
 
                     menu.ButtonLogoutClick += (_sender, _e) =>
                     {
-                        MessageBox.Show("Pomyślnie wylogowano.");
                         this.Show();
                     };
                     menu.Show();
@@ -126,11 +122,14 @@ namespace RealEstateProject
                 MessageBox.Show("Istnieje już użytkownik o podanym loginie");
                 return false;
             }
-
-            if (String.IsNullOrEmpty(this.textBlockLogin.Text) || String.IsNullOrEmpty(this.passwordBox.Password) ||
-                    String.IsNullOrEmpty(this.textBoxName.Text) || String.IsNullOrEmpty(this.textBoxSurname.Text))
+            if (this.textBoxLogin.Text.Length < 3 || this.passwordBox.Password.Length < 3)
             {
-                MessageBox.Show("Nalezy uzupełnić wszystkie pola.");
+                MessageBox.Show("Login i hasło muszą mieć conajmniej 3 znaki!");
+                return false;
+            }
+            if(String.IsNullOrEmpty(this.textBoxName.Text) || String.IsNullOrEmpty(this.textBoxSurname.Text))
+            {
+                MessageBox.Show("Nalezy uzupełnić wszystkie pola!");
                 return false;
             }
             return true;

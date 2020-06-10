@@ -21,25 +21,33 @@ namespace RealEstateProject
     /// </summary>
     public partial class Specification : Window
     {
-        public Specification(bool ifAdminCheck, RealEstate realEstate)
+        private RealEstate RealEstate { get; set; }
+        private List<RealEstate> RealEstateList { get; set; }
+
+        public delegate void ButtonDeleteItemDelegate(object sender, RoutedEventArgs e);
+        public event ButtonDeleteItemDelegate ButtonDeleteItemClick;
+        public Specification(int userID, RealEstate realEstate, List<RealEstate> realEstateList)
         {
             InitializeComponent();
             this.DataContext = realEstate;
-            SetTextBlocks(realEstate, ifAdminCheck);
+            SetTextBlocks(realEstate, userID);
+            this.RealEstateList = realEstateList;
+            this.RealEstate = realEstate;
             
         }
 
-        private void SetTextBlocks(RealEstate realEstate, bool adminStatus)
+        
+
+        private void SetTextBlocks(RealEstate realEstate, int userID)
         {
             
-            if(adminStatus)
+            if(userID == 1)
             {
                 ButtonReservation.Visibility = Visibility.Collapsed;
             }
             else
             {
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
-                ButtonReservation.SetValue(Grid.ColumnProperty, 1);
             }
 
             string typeOfSelectedRealEstate = realEstate.Type.ToString();
@@ -89,11 +97,20 @@ namespace RealEstateProject
 
         private void ButtonDeleteProduct_Click(object sender, RoutedEventArgs e)
         {
-            //using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
-            //{
-            //    BinaryFormatter bin = new BinaryFormatter();
-            //    bin.Serialize(stream, this.RealEstatesList);
-            //}
+            var removedItem = this.RealEstateList.Where(x => x.RealEstateID == RealEstate.RealEstateID).FirstOrDefault();
+            this.RealEstateList.Remove(removedItem);
+            using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(stream, this.RealEstateList);
+            }
+
+            this.Close();
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs();
+            ButtonDeleteItemClick(this, routedEventArgs);
+
+            
+
         }
 
         private void ButtonReservation_Click(object sender, RoutedEventArgs e)
