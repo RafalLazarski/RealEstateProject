@@ -52,15 +52,29 @@ namespace RealEstateProject
             InitializeComponent();
             this.CurrentUserID = currentUserID;
             this.UsersList = usersList;
+            this.SetComboboxesItemsSources();
             this.SetCurrentUserDetails();
             this.SetTextBlocks();
             this.ImportRealEstatesList();
             this.ChangeCheckboxesSelection();
+            this.RefreshListViewUsers(false);
+            if (currentUserID != 1)
+                this.tabitemAdminPanel.Visibility = Visibility.Collapsed;
         }
 
         #endregion
 
         #region Helper Methods
+
+        private void SetComboboxesItemsSources()
+        {
+            this.ComboBoxCity.ItemsSource = Enum.GetValues(typeof(Cities)).Cast<Cities>();
+            this.ComboBoxFlatStandards.ItemsSource = Enum.GetValues(typeof(Flat.FlatStandards)).Cast<Flat.FlatStandards>();
+            this.ComboBoxMarket.ItemsSource = Enum.GetValues(typeof(Markets)).Cast<Markets>();
+            this.ComboBoxPlotTypes.ItemsSource = Enum.GetValues(typeof(Plot.PlotTypes)).Cast<Plot.PlotTypes>();
+            this.ComboBoxType.ItemsSource = Enum.GetValues(typeof(Types)).Cast<Types>();
+            this.ComboBoxTypeOfOven.ItemsSource = Enum.GetValues(typeof(House.TypesOfOven)).Cast<House.TypesOfOven>();
+        }
 
         private void ImportRealEstatesList()
         {
@@ -120,24 +134,9 @@ namespace RealEstateProject
             this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
         }
 
-        private void ComboBoxItemHouse_Selected(object sender, RoutedEventArgs e)
-        {
-            SetTextBlocks();
-        }
-
-        private void ComboBoxItemFlat_Selected(object sender, RoutedEventArgs e)
-        {
-            SetTextBlocks();
-        }
-
-        private void ComboBoxItemPlot_Selected(object sender, RoutedEventArgs e)
-        {
-            SetTextBlocks();
-        }
-
         private void SetTextBlocks()
         {
-            if (!ComboBoxItemHouse.IsSelected && !ComboBoxItemFlat.IsSelected && !ComboBoxItemPlot.IsSelected)
+            if (this.ComboBoxType.SelectedValue == null)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
@@ -156,7 +155,7 @@ namespace RealEstateProject
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 6);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 2);
             }
-            else if (ComboBoxItemHouse.IsSelected)
+            else if ((Types)this.ComboBoxType.SelectedValue == Types.Dom)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Visible;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Visible;
@@ -175,7 +174,7 @@ namespace RealEstateProject
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 9);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 1);
             }
-            else if (ComboBoxItemFlat.IsSelected)
+            else if ((Types)this.ComboBoxType.SelectedValue == Types.Mieszkanie)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
@@ -194,7 +193,7 @@ namespace RealEstateProject
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 9);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 1);
             }
-            else if (ComboBoxItemPlot.IsSelected)
+            else if ((Types)this.ComboBoxType.SelectedValue == Types.Działka)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
@@ -238,7 +237,7 @@ namespace RealEstateProject
                         specification.Show();
                         specification.ButtonDeleteItemClick += (_sender, _e) =>
                         {
-                            this.RefreshListView();
+                            this.RefreshListView(RealEstateSelectedOne);
                         };
                     }
                 }
@@ -273,7 +272,14 @@ namespace RealEstateProject
             this.listviewOferts.ItemsSource = this.RealEstatesListTemp;
         }
 
-        
+        private void RefreshListView(RealEstate item)
+        {
+            this.RealEstatesListTemp.Remove(item);
+            this.listviewOferts.ItemsSource = null;
+            this.listviewOferts.ItemsSource = this.RealEstatesListTemp;
+        }
+
+
 
         //checkboxy
         private void CheckBoxTypeHome_Unchecked(object sender, RoutedEventArgs e)
@@ -510,18 +516,16 @@ namespace RealEstateProject
             }
         }
 
-        
+
 
         private void ButtonLogout_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            RoutedEventArgs routedEventArgs = new RoutedEventArgs();
-            ButtonLogoutClick(this, routedEventArgs);
         }
 
         private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
-            string msg = "Czy na pewno chcesz zamknąć aplikację?";
+            string msg = "Czy na pewno chcesz się wylogować?";
             MessageBoxResult result =
               MessageBox.Show(
                 msg,
@@ -534,6 +538,9 @@ namespace RealEstateProject
             }
             else
             {
+                RoutedEventArgs routedEventArgs = new RoutedEventArgs();
+                ButtonLogoutClick(this, routedEventArgs);
+
                 using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
@@ -560,14 +567,35 @@ namespace RealEstateProject
                 && this.TextBoxNumberofFloorsSelectNewRealEstateWindow.Text != null && this.TextBoxHouseAreaSelectNewRealEstateWindow.Text != null)
                 || (this.ComboBoxFlatStandards.SelectedItem != null && this.TextBoxFloorNumberSelectNewRealEstateWindow.Text != null
                 && this.TextBoxRoomsSelectNewRealEstateWindow.Text != null) || this.ComboBoxPlotTypes.SelectedItem != null))
-            {
-                MessageBox.Show("uzupełnione legitnie");
-                //if (this.ComboBoxFlatStandards.Visibility == Visibility.Visible)
-                //    this.RealEstatesList.Add(new Flat(Int32.Parse(this.TextBoxFloorNumberSelectNewRealEstateWindow.Text),
-                //        Int32.Parse(this.TextBoxRoomsSelectNewRealEstateWindow.Text), this.ComboBoxFlatStandards.SelectedItem,
-                //        Int32.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text), Int32.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text),
-                //        (Cities)this.ComboBoxCity.SelectedItem, Int32.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text), (Markets)this.ComboBoxMarket.SelectedItem));
-                //this.RefreshListView();
+            {              
+                switch ((Types)this.ComboBoxType.SelectedValue)
+                {
+                    case Types.Mieszkanie:
+                        this.RealEstatesList.Add(new Flat(Int32.Parse(this.TextBoxFloorNumberSelectNewRealEstateWindow.Text),
+                        Int32.Parse(this.TextBoxRoomsSelectNewRealEstateWindow.Text), (Flat.FlatStandards)this.ComboBoxFlatStandards.SelectedItem,
+                        Double.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text), Double.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text),
+                        (Cities)this.ComboBoxCity.SelectedItem, Double.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text), (Markets)this.ComboBoxMarket.SelectedItem));
+                        if (this.CheckBoxTypeFlat.IsChecked == true)
+                            this.RealEstatesListTemp.Add(this.RealEstatesList.Last());
+                        break;
+                    case Types.Dom:
+                        this.RealEstatesList.Add(new House(new Plot(Plot.PlotTypes.Budowlana, Double.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text),
+                            Double.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text), (Cities)this.ComboBoxCity.SelectedItem, (Markets)this.ComboBoxMarket.SelectedItem),
+                            Int32.Parse(this.TextBoxNumberofFloorsSelectNewRealEstateWindow.Text), Double.Parse(this.TextBoxHouseAreaSelectNewRealEstateWindow.Text), (House.TypesOfOven)this.ComboBoxTypeOfOven.SelectedItem,
+                            Double.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text)));
+                        if (this.CheckBoxTypeHome.IsChecked == true)
+                            this.RealEstatesListTemp.Add(this.RealEstatesList.Last());
+                        break;
+                    case Types.Działka:
+                        this.RealEstatesList.Add(new Plot(Plot.PlotTypes.Budowlana, Double.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text),
+                            Double.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text), (Cities)this.ComboBoxCity.SelectedItem, (Markets)this.ComboBoxMarket.SelectedItem));
+                        if (this.CheckBoxTypePlot.IsChecked == true)
+                            this.RealEstatesListTemp.Add(this.RealEstatesList.Last());
+                        break;
+
+                }
+                MessageBox.Show("Pomyślnie dodano nieruchomość");
+                this.RefreshListView();
             }
             else
                 MessageBox.Show("Należy uzupełnić wszystkie pola.");
@@ -615,11 +643,15 @@ namespace RealEstateProject
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void RefreshListViewAdmin()
+        private void RefreshListViewUsers(bool isArchive)
         {
-            this.listviewOferts.ItemsSource = null;
-            this.listviewOferts.ItemsSource = this.RealEstatesList;
+            this.listviewUsers.ItemsSource = null;
+            if (!isArchive)
+                this.listviewUsers.ItemsSource = this.UsersList.Where(x => x.Archive == false && x.UserID != 1).OrderBy(x => x.UserID);
+            else
+                this.listviewUsers.ItemsSource = this.UsersList.Where(x => x.UserID != 1).OrderBy(x => x.UserID);
         }
+
 
         private void RefreshListViewCustomer(int adminStatus)
         {
@@ -634,9 +666,44 @@ namespace RealEstateProject
             }
         }
 
+
         #endregion
 
+        private void ButtonBanUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.listviewUsers.SelectedItem != null)
+            {
+                var selectedUser = this.UsersList.Where(x => x.Equals(this.listviewUsers.SelectedItem)).FirstOrDefault();
+                if (!selectedUser.Archive)
+                {
+                    selectedUser.Archive = true;
+                    if (this.checkboxShowArchive.IsChecked == true)
+                        this.RefreshListViewUsers(true);
+                    else
+                        this.RefreshListViewUsers(false);
+                    MessageBox.Show("Użytkownik został pomyślnie zbanowany");
+                }
+                else
+                    MessageBox.Show("Uzytkownik jest już zbanowany.");
+            }
+            else
+                MessageBox.Show("Należy wybrać użytkownika z listy");
+        }
 
+        private void CheckboxShowArchive_Checked(object sender, RoutedEventArgs e)
+        {
+            this.RefreshListViewUsers(true);
+        }
+
+        private void CheckboxShowArchive_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.RefreshListViewUsers(false);
+        }
+
+        private void ComboBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.SetTextBlocks();
+        }
     }
 
 }

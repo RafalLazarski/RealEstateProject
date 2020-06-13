@@ -27,27 +27,16 @@ namespace RealEstateProject
             this.Price = housePlot.Price;
             this.City = housePlot.City;
             this.Market = housePlot.Market;
-
-            switch (typeOfOven)
-            {
-                case TypesOfOven.CoalFurnace:
-                    this.TypeOfOven = "Piec węglowy";
-                    break;
-                case TypesOfOven.ElectricStove:
-                    this.TypeOfOven = "Piec elektryczny";
-                    break;
-                case TypesOfOven.PelletStove:
-                    this.TypeOfOven = "Piec na pellet";
-                    break;
-            }
+            this.Surface = housePlot.Surface;
+            this.TypeOfOven = typeOfOven.ToString();
         }
 
 
         public enum TypesOfOven
         {
-            PelletStove,
-            ElectricStove,
-            CoalFurnace
+            Pellet,
+            Elektryczny,
+            Węglowy
         }
 
         public override string ToString()

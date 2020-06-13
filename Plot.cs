@@ -14,30 +14,19 @@ namespace RealEstateProject
         public override int RealEstateID { get => base.RealEstateID; set => base.RealEstateID = value; }
 
 
-        public Plot(PlotTypes plotTypeID, double price, float surface, Cities city, Markets market)
+        public Plot(PlotTypes plotType, double price, double surface, Cities city, Markets market)
             : base(price, surface, city, market)
         {
             ++RealEstate.RealEstateCount;
             this.RealEstateID = RealEstate.RealEstateCount;
-            switch (plotTypeID)
-            {
-                case PlotTypes.BuildingPlot:
-                    this.PlotTypeName = "Działka budowlana";
-                    break;
-                case PlotTypes.ForestPlot:
-                    this.PlotTypeName = "Działka leśna";
-                    break;
-                case PlotTypes.SummerPlot:
-                    this.PlotTypeName = "Działka letniskowa";
-                    break;
-            }
+            this.PlotTypeName = plotType.ToString();
         }
 
         public enum PlotTypes
         {
-            ForestPlot,
-            SummerPlot,
-            BuildingPlot
+            Budowlana,
+            Letniskowa,
+            Leśna
         }
 
         public override string ToString()

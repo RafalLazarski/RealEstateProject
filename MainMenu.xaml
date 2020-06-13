@@ -213,25 +213,25 @@
 
                     </Grid>
 
-                        <!--Druga kolumna-->
+                    <!--Druga kolumna-->
 
-                        <!--Kupione działki-->
-                        <ListView Margin="10" x:Name="listviewCustomer" Grid.Row="1" Grid.Column="1">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Rodzaj:" x:Name="EstateTypeCustomer" Width="80" DisplayMemberBinding="{Binding Type}"/>
-                                    <GridViewColumn Header="Cena:" x:Name="EstatePriceCustomer" Width="80" DisplayMemberBinding="{Binding Price}" />
-                                    <GridViewColumn Header="Powierzchnia:" x:Name="EstateAreaCustomer" Width="80" DisplayMemberBinding="{Binding Surface}" />
-                                    <GridViewColumn Header="Miasto:" x:Name="EstateCityCustomer" Width="80" DisplayMemberBinding="{Binding City}" />
-                                    <GridViewColumn Header="Rynek:" x:Name ="EstateMarketCustomer" Width="80" DisplayMemberBinding="{Binding Market}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                    <!--Kupione działki-->
+                    <ListView Margin="10" x:Name="listviewCustomer" Grid.Row="1" Grid.Column="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Rodzaj:" x:Name="EstateTypeCustomer" Width="80" DisplayMemberBinding="{Binding Type}"/>
+                                <GridViewColumn Header="Cena:" x:Name="EstatePriceCustomer" Width="80" DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Header="Powierzchnia:" x:Name="EstateAreaCustomer" Width="80" DisplayMemberBinding="{Binding Surface}" />
+                                <GridViewColumn Header="Miasto:" x:Name="EstateCityCustomer" Width="80" DisplayMemberBinding="{Binding City}" />
+                                <GridViewColumn Header="Rynek:" x:Name ="EstateMarketCustomer" Width="80" DisplayMemberBinding="{Binding Market}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Panel administratora">
+            <TabItem x:Name="tabitemAdminPanel" Header="Panel administratora">
                 <Grid x:Name="gridAdminPanel">
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="40"/>
@@ -250,18 +250,26 @@
                         <ColumnDefinition Width="17*"/>
                         <ColumnDefinition MaxWidth="150" Width="150*"/>
                         <ColumnDefinition MaxWidth="10" Width="10*"/>
-                        <ColumnDefinition Width="494*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!--Lista wszystkich produktów-->
-                    <ListView Margin="10" x:Name="listviewAdmin" Grid.Row="3" Grid.RowSpan="7" Grid.Column="4">
+                    <StackPanel x:Name="stackpanelBanArchive" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" >
+                        <Button x:Name="buttonBanUser"   Content="Zbanuj użytkownika" Click="ButtonBanUser_Click" Width="120" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2"/>
+                        <TextBlock x:Name="textblockArchive" Text="Pokaż archiwalnych:" Grid.Row="3" Grid.Column="5"/>
+                        <CheckBox x:Name="checkboxShowArchive" Checked="CheckboxShowArchive_Checked" Unchecked="CheckboxShowArchive_Unchecked" Grid.Row="3" Grid.Column="6"/>
+                    </StackPanel>
+                    
+
+                    <!--Lista wszystkich użytkowników-->
+                    <ListView Margin="10" x:Name="listviewUsers" Grid.Row="3" Grid.RowSpan="7" Grid.Column="4" Grid.ColumnSpan="2">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Rodzaj:" x:Name="EstateTypeAdmin" Width="80" DisplayMemberBinding="{Binding Type}"/>
-                                <GridViewColumn Header="Cena:" x:Name="EstatePriceAdmin" Width="80" DisplayMemberBinding="{Binding Price}" />
-                                <GridViewColumn Header="Powierzchnia:" x:Name="EstateAreaAdmin" Width="80" DisplayMemberBinding="{Binding Surface}" />
-                                <GridViewColumn Header="Miasto:" x:Name="EstateCityAdmin" Width="80" DisplayMemberBinding="{Binding City}" />
-                                <GridViewColumn Header="Rynek:" x:Name ="EstateMarketAdmin" Width="80" DisplayMemberBinding="{Binding Market}" />
+                                <GridViewColumn Header="Login:"  Width="120" DisplayMemberBinding="{Binding Login}" />
+                                <GridViewColumn Header="Imię:"  Width="120" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Nazwisko:"  Width="120" DisplayMemberBinding="{Binding Surname}" />
+                                <GridViewColumn Header="Archiwalny:"  Width="120" DisplayMemberBinding="{Binding Archive}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -273,20 +281,12 @@
                     <!--Rodzaj-->
                     <TextBlock x:Name="TextBlockTypeNewRealEstateWindow" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Rodzaj:" Grid.ColumnSpan="2" Margin="0,9"/>
                     <StackPanel x:Name="StackPanelTypeNewRealEstateWindow" Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" Margin="0,6">
-                        <ComboBox x:Name="ComboBoxType">
-                            <ComboBoxItem x:Name="ComboBoxItemHouse" Selected="ComboBoxItemHouse_Selected" Content="Dom"/>
-                            <ComboBoxItem x:Name="ComboBoxItemFlat" Selected="ComboBoxItemFlat_Selected" Content="Mieszkanie"/>
-                            <ComboBoxItem Name="ComboBoxItemPlot" Selected="ComboBoxItemPlot_Selected" Content="Działka"/>
-                        </ComboBox>
+                        <ComboBox x:Name="ComboBoxType" SelectionChanged="ComboBoxType_SelectionChanged"/>
                     </StackPanel>
                     <!--Miasto-->
                     <TextBlock x:Name="TextBlockCity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Miasto:" Grid.ColumnSpan="2" Margin="0,9"/>
                     <StackPanel x:Name="StackPanelCityNewRealEstateWindow" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,6">
-                        <ComboBox x:Name="ComboBoxCity">
-                            <ComboBoxItem Content="Białystok"/>
-                            <ComboBoxItem Content="Moskwa"/>
-                            <ComboBoxItem Content="Buenos Aires"/>
-                        </ComboBox>
+                        <ComboBox x:Name="ComboBoxCity" />
                     </StackPanel>
                     <!--Cena-->
                     <TextBlock x:Name="TextBlockPriceNewRealEstateWindow" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Cena:" Grid.ColumnSpan="2" Margin="0,9"/>
@@ -297,10 +297,7 @@
                     <!--Rynek-->
                     <TextBlock x:Name="TextBlockMarketNewRealEstateWindow" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Rynek:" Grid.ColumnSpan="2" Margin="0,9"/>
                     <StackPanel x:Name="StackPanelMarketNewRealEstateWindow" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="0,6">
-                        <ComboBox x:Name="ComboBoxMarket">
-                            <ComboBoxItem Content="Pierwotny"/>
-                            <ComboBoxItem Content="Wtórny"/>
-                        </ComboBox>
+                        <ComboBox x:Name="ComboBoxMarket" />
                     </StackPanel>
                     <!--Powierzchnia-->
                     <TextBlock x:Name="TextBlockSurfaceNewRealEstateWindow" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Powierzchnia:" Grid.ColumnSpan="2" Margin="0,9"/>
@@ -311,11 +308,7 @@
                     <!--Piec-->
                     <TextBlock x:Name="TextBlockTypeOfOvenNewRealEstateWindow" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Piec:" Grid.ColumnSpan="2" Margin="0,9"/>
                     <StackPanel x:Name="StackPanelTypeOfOvenNewRealEstateWindow" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Margin="0,6">
-                        <ComboBox x:Name="ComboBoxTypeOfOven">
-                            <ComboBoxItem Content="Piec węglowy"/>
-                            <ComboBoxItem Content="Piec elektryczny"/>
-                            <ComboBoxItem Content="Piec na pellet"/>
-                        </ComboBox>
+                        <ComboBox x:Name="ComboBoxTypeOfOven" />
                     </StackPanel>
                     <!--Piętra dla domu-->
                     <TextBlock x:Name="TextBlockNumberofFloorsNewRealEstateWindow" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Text="Piętro:" Grid.ColumnSpan="2" Margin="0,9"/>
@@ -327,11 +320,7 @@
                     <!--rodzaj mieszkania-->
                     <TextBlock x:Name="TextBlockFlatStandardsNewRealEstateWindow" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Typ mieszkania:" Grid.ColumnSpan="2" Margin="0,9"/>
                     <StackPanel x:Name="StackPanelFlatStandardsNewRealEstateWindow" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Margin="0,6">
-                        <ComboBox x:Name="ComboBoxFlatStandards">
-                            <ComboBoxItem Content="Apartament"/>
-                            <ComboBoxItem Content="Mieszkanie klasy średniej"/>
-                            <ComboBoxItem Content="Mieszkanie komunalne"/>
-                        </ComboBox>
+                        <ComboBox x:Name="ComboBoxFlatStandards" />
                     </StackPanel>
                     <!--numer piętra mieszkania-->
                     <TextBlock x:Name="TextBlockFloorNumberNewRealEstateWindow" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Text="Piętro:" Grid.ColumnSpan="2" Margin="0,9"/>
@@ -343,11 +332,7 @@
                     <!--rodzaj działki-->
                     <TextBlock x:Name="TextBlockPlotTypesNewRealEstateWindow" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Typ działki:" Grid.ColumnSpan="2" Margin="0,9"/>
                     <StackPanel x:Name="StackPanelPlotTypesNewRealEstateWindow" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Margin="0,6">
-                        <ComboBox x:Name="ComboBoxPlotTypes">
-                            <ComboBoxItem Content="Działka budowlana"/>
-                            <ComboBoxItem Content="Działka leśna"/>
-                            <ComboBoxItem Content="Działka letniskowa"/>
-                        </ComboBox>
+                        <ComboBox x:Name="ComboBoxPlotTypes" />
                     </StackPanel>
 
                     <Button x:Name="buttonAddRealEstate" Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="3" Height="50" Margin="5,5,5,0" VerticalAlignment="Top" Content="Dodaj nieruchomość" Click="buttonAddRealEstate_Click" />

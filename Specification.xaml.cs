@@ -107,10 +107,7 @@ namespace RealEstateProject
 
             this.Close();
             RoutedEventArgs routedEventArgs = new RoutedEventArgs();
-            ButtonDeleteItemClick(this, routedEventArgs);
-
-            
-
+            ButtonDeleteItemClick(this, routedEventArgs);           
         }
 
         private void ButtonReservation_Click(object sender, RoutedEventArgs e)
