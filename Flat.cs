@@ -15,33 +15,21 @@ namespace RealEstateProject
         public string FlatStandard { get; set; }
         public override int RealEstateID { get => base.RealEstateID; set => base.RealEstateID = value; }
 
-        public Flat(int floorNumber, int roomsNumber, FlatStandards flatStandard, double price, float surface, Cities city, double rent, Markets market)
+        public Flat(int floorNumber, int roomsNumber, FlatStandards flatStandard, double price, double surface, Cities city, double rent, Markets market)
             : base(price, surface, city, rent, market)
         {
             ++RealEstate.RealEstateCount;
+            this.FlatStandard = flatStandard.ToString();
             this.FloorNumber = floorNumber;
             this.RoomsNumber = roomsNumber;
             this.RealEstateID = RealEstate.RealEstateCount;
-
-            switch (flatStandard)
-            {
-                case FlatStandards.Apartment:
-                    this.FlatStandard = "Apartament";
-                    break;
-                case FlatStandards.AverageFlat:
-                    this.FlatStandard = "Mieszkanie klasy średniej";
-                    break;
-                case FlatStandards.CommunalFlat:
-                    this.FlatStandard = "Mieszkanie komunalne";
-                    break;
-            }
         }
 
         public enum FlatStandards
         {
-            CommunalFlat,
-            AverageFlat,
-            Apartment
+            Komunalne,
+            KlasyŚredniej,
+            Apartament
         }
 
         public override string ToString()

@@ -15,6 +15,7 @@ namespace RealEstateProject
         public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public bool Archive { get; set; }
         public UserPreferences UserPreferences { get; set; }
 
         public User(string login, string password, string name, string surname, UserPreferences userPreferences)
@@ -25,6 +26,7 @@ namespace RealEstateProject
             this.Name = name;
             this.Surname = surname;
             this.UserPreferences = userPreferences;
+            this.Archive = false;
             ++UsersCount;
         }
 

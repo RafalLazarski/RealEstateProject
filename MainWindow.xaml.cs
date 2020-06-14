@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace RealEstateProject
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public List<User> UsersList { get; set; }
@@ -70,19 +67,22 @@ namespace RealEstateProject
                 var currentUser = this.UsersList.Where(x => x.Login == this.textBoxLogin.Text && x.Password == this.passwordBox.Password);
                 if (currentUser.Any())
                 {
-                    this.Hide();
-                    MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
-
-                    menu.ButtonLogoutClick += (_sender, _e) =>
+                    if (!currentUser.FirstOrDefault().Archive)
                     {
-                        this.Show();
-                    };
-                    menu.Show();
-                    //Test test = new Test();
-                    //test.Show();
+                        this.Hide();
+                        MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
+
+                        menu.ButtonLogoutClick += (_sender, _e) =>
+                        {
+                            this.Show();
+                        };
+                        menu.Show();
+                    }
+                    else
+                        MessageBox.Show("Twoje konto zostało zbanowane!");
                 }
                 else
-                    MessageBox.Show("Podano błędne dane logowania.");
+                    MessageBox.Show("Podano błędne dane logowania!");
             }
         }
 

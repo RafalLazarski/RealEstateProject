@@ -16,21 +16,22 @@ using System.Windows.Shapes;
 
 namespace RealEstateProject
 {
-    /// <summary>
-    /// Interaction logic for Specification.xaml
-    /// </summary>
     public partial class Specification : Window
     {
         private RealEstate RealEstate { get; set; }
         private List<RealEstate> RealEstateList { get; set; }
+        private int UserID { get; set; }
 
         public delegate void ButtonDeleteItemDelegate(object sender, RoutedEventArgs e);
         public event ButtonDeleteItemDelegate ButtonDeleteItemClick;
+        public delegate void ButtonReserveItemDelegate(object sender, RoutedEventArgs e);
+        public event ButtonReserveItemDelegate ButtonReserveItemClick;
         public Specification(int userID, RealEstate realEstate, List<RealEstate> realEstateList)
         {
             InitializeComponent();
             this.DataContext = realEstate;
-            SetTextBlocks(realEstate, userID);
+            this.UserID = userID;
+            SetTextBlocks(realEstate);
             this.RealEstateList = realEstateList;
             this.RealEstate = realEstate;
             
@@ -38,16 +39,22 @@ namespace RealEstateProject
 
         
 
-        private void SetTextBlocks(RealEstate realEstate, int userID)
+        private void SetTextBlocks(RealEstate realEstate)
         {
             
-            if(userID == 1)
+            if(this.UserID == 1)
             {
                 ButtonReservation.Visibility = Visibility.Collapsed;
             }
             else
             {
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
+            }
+
+            if (realEstate.OwnerID != 1 || realEstate.SoldItem)
+            {
+                ButtonDeleteProduct.Visibility = Visibility.Collapsed;
+                ButtonReservation.Visibility = Visibility.Collapsed;
             }
 
             string typeOfSelectedRealEstate = realEstate.Type.ToString();
@@ -115,7 +122,17 @@ namespace RealEstateProject
 
         private void ButtonReservation_Click(object sender, RoutedEventArgs e)
         {
-
+            this.RealEstateList.Where(x => x.RealEstateID == RealEstate.RealEstateID).FirstOrDefault().OwnerID = this.UserID;
+            
+            using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(stream, this.RealEstateList);
+            }
+            MessageBox.Show("Zarezerwowano nieruchomość. Prosimy czekać na akceptację");
+            this.Close();
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs();
+            ButtonReserveItemClick(this, routedEventArgs);
         }
 
     }

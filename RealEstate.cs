@@ -13,16 +13,20 @@ namespace RealEstateProject
     {
         public string Type { get; set; }
         public double Price { get; set; }
-        public float Surface { get; set; }
+        public double Surface { get; set; }
         public string City { get; set; }
         public double Rent { get; set; }
         public string Market { get; set; }
         public virtual int RealEstateID { get; set; }
         public static int RealEstateCount = 1;
+        public int OwnerID { get; set;}
+        public bool SoldItem { get; set; }
 
         //działka
-        public RealEstate(double price, float surface, Cities city, Markets market)
+        public RealEstate(double price, double surface, Cities city, Markets market)
         {
+            this.OwnerID = 1;
+            this.SoldItem = false;
             this.Type = Types.Działka.ToString();
             this.Price = price;
             this.Surface = surface;
@@ -33,13 +37,17 @@ namespace RealEstateProject
         //dom
         public RealEstate(double rent)
         {
+            this.OwnerID = 1;
+            this.SoldItem = false;
             this.Type = Types.Dom.ToString();
             this.Rent = rent;
         }
 
         //mieszkanie
-        public RealEstate(double price, float surface, Cities city, double rent, Markets market)
+        public RealEstate(double price, double surface, Cities city, double rent, Markets market)
         {
+            this.OwnerID = 1;
+            this.SoldItem = false;
             this.Type = Types.Mieszkanie.ToString();
             this.Price = price;
             this.Surface = surface;

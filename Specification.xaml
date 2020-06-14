@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RealEstateProject"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Specification" MinHeight="460" MaxHeight="460" MinWidth="300" MaxWidth="500">
+        Title="Specification" MinHeight="460" MaxHeight="460" MinWidth="400" MaxWidth="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="40"/>

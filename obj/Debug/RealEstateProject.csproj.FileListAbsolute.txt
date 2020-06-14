@@ -86,5 +86,3 @@ C:\Users\48536\Tygrys\programowanie\RealEstateProject\obj\Debug\RealEstateProjec
 C:\Users\48536\Tygrys\programowanie\RealEstateProject\obj\Debug\RealEstateProject.pdb
 C:\Users\48536\Tygrys\programowanie\RealEstateProject\obj\Debug\Specification.g.cs
 C:\Users\48536\Tygrys\programowanie\RealEstateProject\obj\Debug\Specification.baml
-C:\Users\48536\Tygrys\programowanie\RealEstateProject\obj\Debug\Test.g.cs
-C:\Users\48536\Tygrys\programowanie\RealEstateProject\obj\Debug\Test.baml

@@ -24,13 +24,13 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="textBlockLogin" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" Text="Login:"/>
-        <TextBox x:Name="textBoxLogin" MaxWidth="250" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="textBoxLogin" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="1" Grid.Column="1"/>
         <TextBlock x:Name="textBlockPassword" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="1" Text="Hasło:"/>
-        <PasswordBox x:Name="passwordBox" MaxWidth="250" Grid.Row="3" Grid.Column="1"  PasswordChar="*"/>
+        <PasswordBox x:Name="passwordBox" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="3" Grid.Column="1"  PasswordChar="*"/>
         <TextBlock x:Name="textBlockName" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="4" Grid.Column="1" Text="Imię:"/>
-        <TextBox x:Name="textBoxName" MaxWidth="250" Grid.Row="5" Grid.Column="1"/>
+        <TextBox x:Name="textBoxName" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="5" Grid.Column="1"/>
         <TextBlock x:Name="textBlockSurname" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="6" Grid.Column="1" Text="Nazwisko:"/>
-        <TextBox x:Name="textBoxSurname" MaxWidth="250" Grid.Row="7" Grid.Column="1"/>
+        <TextBox x:Name="textBoxSurname" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="7" Grid.Column="1"/>
         <Button x:Name="ButtonLogin" MaxWidth="250" Height="40" VerticalAlignment="Bottom" Margin="10" Grid.Row="8" Grid.Column="1" Click="ButtonLogin_Click" Content="Zaloguj"/>
         <Button x:Name="ButtonRegister" MaxWidth="250" Height="40" VerticalAlignment="Top" Margin="10" Grid.Row="9" Grid.Column="1" Click="ButtonRegister_Click" Content="Nie mam jeszcze konta, zarejestruj mnie!"/>
 

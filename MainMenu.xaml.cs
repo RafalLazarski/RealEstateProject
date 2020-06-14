@@ -52,25 +52,46 @@ namespace RealEstateProject
             InitializeComponent();
             this.CurrentUserID = currentUserID;
             this.UsersList = usersList;
+            this.SetComboboxesItemsSources();
             this.SetCurrentUserDetails();
             this.SetTextBlocks();
             this.ImportRealEstatesList();
             this.ChangeCheckboxesSelection();
+            this.RefreshListViewUsers(false);
+            if (currentUserID != 1)
+                this.tabitemAdminPanel.Visibility = Visibility.Collapsed;
         }
 
         #endregion
 
         #region Helper Methods
 
+        private void SetComboboxesItemsSources()
+        {
+            this.ComboBoxCity.ItemsSource = Enum.GetValues(typeof(Cities)).Cast<Cities>();
+            this.ComboBoxFlatStandards.ItemsSource = Enum.GetValues(typeof(Flat.FlatStandards)).Cast<Flat.FlatStandards>();
+            this.ComboBoxMarket.ItemsSource = Enum.GetValues(typeof(Markets)).Cast<Markets>();
+            this.ComboBoxPlotTypes.ItemsSource = Enum.GetValues(typeof(Plot.PlotTypes)).Cast<Plot.PlotTypes>();
+            this.ComboBoxType.ItemsSource = Enum.GetValues(typeof(Types)).Cast<Types>();
+            this.ComboBoxTypeOfOven.ItemsSource = Enum.GetValues(typeof(House.TypesOfOven)).Cast<House.TypesOfOven>();
+        }
+
         private void ImportRealEstatesList()
         {
+            
             using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Open))
             {
+                if (new FileInfo("RealEstatesList.txt").Length != 0)
+                {
                 BinaryFormatter bin = new BinaryFormatter();
                 var realEstates = (List<RealEstate>)bin.Deserialize(stream);
                 realEstates.ForEach(x => this.RealEstatesList.Add(x));
+                }
             }
+                
             this.RefreshListView();
+            this.RefreshCustomerListView();
+
         }
 
         private void ChangeCheckboxesSelection()
@@ -118,26 +139,30 @@ namespace RealEstateProject
             this.textblockCurrentUserName.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Name;
             this.textblockCurrentUserSurname.Text = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault().Surname;
             this.CurrentUser = this.UsersList.Where(x => x.UserID == this.CurrentUserID).FirstOrDefault();
+            if(CurrentUser.UserID == 1)
+            {
+                this.MaxWidth = 1100;
+                this.MinWidth = 1100;
+                TextBlockUserProducts.Visibility = Visibility.Collapsed;
+                ButtonSeeMore.Visibility = Visibility.Collapsed;
+                TextBlockAdminProducts.Visibility = Visibility.Visible;
+                ButtonAccept.Visibility = Visibility.Visible;
+                ButtonDecline.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TextBlockAdminProducts.Visibility = Visibility.Collapsed;
+                ButtonAccept.Visibility = Visibility.Collapsed;
+                ButtonDecline.Visibility = Visibility.Collapsed;
+                Grid.SetColumnSpan(listviewOfertsGrid, 6);
+            }
+            
         }
 
-        private void ComboBoxItemHouse_Selected(object sender, RoutedEventArgs e)
-        {
-            SetTextBlocks();
-        }
-
-        private void ComboBoxItemFlat_Selected(object sender, RoutedEventArgs e)
-        {
-            SetTextBlocks();
-        }
-
-        private void ComboBoxItemPlot_Selected(object sender, RoutedEventArgs e)
-        {
-            SetTextBlocks();
-        }
 
         private void SetTextBlocks()
         {
-            if (!ComboBoxItemHouse.IsSelected && !ComboBoxItemFlat.IsSelected && !ComboBoxItemPlot.IsSelected)
+            if (this.ComboBoxType.SelectedValue == null)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
@@ -156,7 +181,7 @@ namespace RealEstateProject
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 6);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 2);
             }
-            else if (ComboBoxItemHouse.IsSelected)
+            else if ((Types)this.ComboBoxType.SelectedValue == Types.Dom)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Visible;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Visible;
@@ -175,7 +200,7 @@ namespace RealEstateProject
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 9);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 1);
             }
-            else if (ComboBoxItemFlat.IsSelected)
+            else if ((Types)this.ComboBoxType.SelectedValue == Types.Mieszkanie)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
@@ -194,7 +219,7 @@ namespace RealEstateProject
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 9);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 1);
             }
-            else if (ComboBoxItemPlot.IsSelected)
+            else if ((Types)this.ComboBoxType.SelectedValue == Types.Działka)
             {
                 TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
                 StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
@@ -212,6 +237,36 @@ namespace RealEstateProject
                 StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Visible;
                 buttonAddRealEstate.SetValue(Grid.RowProperty, 7);
                 buttonAddRealEstate.SetValue(Grid.RowSpanProperty, 2);
+            }
+
+            if(CurrentUserID != 1)
+            {
+                TextBlockTypeNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelTypeNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockCity.Visibility = Visibility.Collapsed;
+                StackPanelCityNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockPriceNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxPriceSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockRentNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxRentSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockMarketNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelMarketNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockSurfaceNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxSurfaceSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelTypeOfOvenNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockNumberofFloorsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxNumberofFloorsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockHouseAreaNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxHouseAreaSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelFlatStandardsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockFloorNumberNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxFloorNumberSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockRoomsNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBoxRoomsSelectNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                TextBlockPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                StackPanelPlotTypesNewRealEstateWindow.Visibility = Visibility.Collapsed;
+                buttonAddRealEstate.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -234,12 +289,23 @@ namespace RealEstateProject
                     if (xRealEstate.RealEstateID.ToString().Equals(listviewOferts.SelectedItem.ToString()))
                     {
                         RealEstate RealEstateSelectedOne = RealEstatesList.Where(x => x.RealEstateID == xRealEstate.RealEstateID).FirstOrDefault();
-                        Specification specification = new Specification(this.CurrentUserID, RealEstateSelectedOne, RealEstatesList);
+                        Specification specification = new Specification(CurrentUserID, RealEstateSelectedOne, RealEstatesList);
                         specification.Show();
-                        specification.ButtonDeleteItemClick += (_sender, _e) =>
+                        if(CurrentUserID == 1)
                         {
-                            this.RefreshListView();
-                        };
+                            specification.ButtonDeleteItemClick += (_sender, _e) =>
+                            {
+                                this.RefreshListView(RealEstateSelectedOne);
+                            };
+                        }
+                        else
+                        {
+                            specification.ButtonReserveItemClick += (_sender, _e) =>
+                            {
+                                this.RefreshListView();
+                                this.RefreshCustomerListView();
+                            };
+                        }
                     }
                 }
             }
@@ -264,16 +330,23 @@ namespace RealEstateProject
         private void RefreshListView(List<RealEstate> tempList)
         {
             this.listviewOferts.ItemsSource = null;
-            this.listviewOferts.ItemsSource = tempList;
+            this.listviewOferts.ItemsSource = tempList.Where(x => x.OwnerID == 1);
         }
 
         private void RefreshListView()
         {
             this.listviewOferts.ItemsSource = null;
-            this.listviewOferts.ItemsSource = this.RealEstatesListTemp;
+            this.listviewOferts.ItemsSource = this.RealEstatesListTemp.Where(x => x.OwnerID == 1);
         }
 
-        
+        private void RefreshListView(RealEstate item)
+        {
+            this.RealEstatesListTemp.Remove(item);
+            this.listviewOferts.ItemsSource = null;
+            this.listviewOferts.ItemsSource = this.RealEstatesListTemp.Where(x => x.OwnerID == 1);
+        }
+
+
 
         //checkboxy
         private void CheckBoxTypeHome_Unchecked(object sender, RoutedEventArgs e)
@@ -510,18 +583,16 @@ namespace RealEstateProject
             }
         }
 
-        
+
 
         private void ButtonLogout_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            RoutedEventArgs routedEventArgs = new RoutedEventArgs();
-            ButtonLogoutClick(this, routedEventArgs);
         }
 
         private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
-            string msg = "Czy na pewno chcesz zamknąć aplikację?";
+            string msg = "Czy na pewno chcesz się wylogować?";
             MessageBoxResult result =
               MessageBox.Show(
                 msg,
@@ -534,6 +605,9 @@ namespace RealEstateProject
             }
             else
             {
+                RoutedEventArgs routedEventArgs = new RoutedEventArgs();
+                ButtonLogoutClick(this, routedEventArgs);
+
                 using (Stream stream = File.Open("RealEstatesList.txt", FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
@@ -545,6 +619,93 @@ namespace RealEstateProject
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, this.UsersList);
                 }
+            }
+        }
+
+
+        #endregion
+
+        #region CustomerProducts
+
+        private void ButtonSeeMore_Click(object sender, RoutedEventArgs e)
+        {
+            if (listviewCustomer.SelectedItem == null)
+            {
+                MessageBox.Show("Należy wybrać nieruchomość z listy.");
+            }
+            else
+            {
+                foreach (RealEstate xRealEstate in RealEstatesList)
+                {
+
+                    if (xRealEstate.RealEstateID.ToString().Equals(listviewCustomer.SelectedItem.ToString()))
+                    {
+                        RealEstate RealEstateSelectedOne = RealEstatesList.Where(x => x.RealEstateID == xRealEstate.RealEstateID).FirstOrDefault();
+                        Specification specification = new Specification(this.CurrentUserID, RealEstateSelectedOne, RealEstatesList);
+                        specification.Show();
+                        specification.ButtonReserveItemClick += (_sender, _e) =>
+                        {
+                            this.RefreshListView();
+                            this.RefreshCustomerListView();
+                        };
+                    }
+                }
+            }
+        }
+
+        private void RefreshCustomerListView()
+        {
+            listviewCustomer.ItemsSource = null;
+            if (CurrentUser.UserID == 1)
+            {
+                listviewCustomer.ItemsSource = RealEstatesList.Where(x => x.OwnerID != 1 && x.SoldItem == false);
+            }
+            else
+            {
+                listviewCustomer.ItemsSource = RealEstatesList.Where(x => x.OwnerID == CurrentUser.UserID && x.SoldItem == true);
+            }
+
+        }
+
+        private void ButtonAccept_Click(object sender, RoutedEventArgs e)
+        {
+            if (listviewCustomer.SelectedItem == null)
+            {
+                MessageBox.Show("Należy wybrać nieruchomość z listy.");
+            }
+            else
+            {
+                foreach (RealEstate xRealEstate in RealEstatesList)
+                {
+
+                    if (xRealEstate.RealEstateID.ToString().Equals(listviewCustomer.SelectedItem.ToString()))
+                    {
+                        xRealEstate.SoldItem = true;
+                    }
+                }
+                this.RefreshCustomerListView();
+                this.RefreshListView();
+            }
+        }
+
+        private void ButtonDecline_Click(object sender, RoutedEventArgs e)
+        {
+            if (listviewCustomer.SelectedItem == null)
+            {
+                MessageBox.Show("Należy wybrać nieruchomość z listy.");
+            }
+            else
+            {
+                foreach (RealEstate xRealEstate in RealEstatesList)
+                {
+
+                    if (xRealEstate.RealEstateID.ToString().Equals(listviewCustomer.SelectedItem.ToString()))
+                    {
+                        xRealEstate.OwnerID = 1;
+                    }
+                }
+                this.RefreshCustomerListView();
+                this.RefreshListView();
             }
         }
 
@@ -561,13 +722,34 @@ namespace RealEstateProject
                 || (this.ComboBoxFlatStandards.SelectedItem != null && this.TextBoxFloorNumberSelectNewRealEstateWindow.Text != null
                 && this.TextBoxRoomsSelectNewRealEstateWindow.Text != null) || this.ComboBoxPlotTypes.SelectedItem != null))
             {
-                MessageBox.Show("uzupełnione legitnie");
-                //if (this.ComboBoxFlatStandards.Visibility == Visibility.Visible)
-                //    this.RealEstatesList.Add(new Flat(Int32.Parse(this.TextBoxFloorNumberSelectNewRealEstateWindow.Text),
-                //        Int32.Parse(this.TextBoxRoomsSelectNewRealEstateWindow.Text), this.ComboBoxFlatStandards.SelectedItem,
-                //        Int32.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text), Int32.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text),
-                //        (Cities)this.ComboBoxCity.SelectedItem, Int32.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text), (Markets)this.ComboBoxMarket.SelectedItem));
-                //this.RefreshListView();
+                switch ((Types)this.ComboBoxType.SelectedValue)
+                {
+                    case Types.Mieszkanie:
+                        this.RealEstatesList.Add(new Flat(Int32.Parse(this.TextBoxFloorNumberSelectNewRealEstateWindow.Text),
+                        Int32.Parse(this.TextBoxRoomsSelectNewRealEstateWindow.Text), (Flat.FlatStandards)this.ComboBoxFlatStandards.SelectedItem,
+                        Double.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text), Double.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text),
+                        (Cities)this.ComboBoxCity.SelectedItem, Double.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text), (Markets)this.ComboBoxMarket.SelectedItem));
+                        if (this.CheckBoxTypeFlat.IsChecked == true)
+                            this.RealEstatesListTemp.Add(this.RealEstatesList.Last());
+                        break;
+                    case Types.Dom:
+                        this.RealEstatesList.Add(new House(new Plot(Plot.PlotTypes.Budowlana, Double.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text),
+                            Double.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text), (Cities)this.ComboBoxCity.SelectedItem, (Markets)this.ComboBoxMarket.SelectedItem),
+                            Int32.Parse(this.TextBoxNumberofFloorsSelectNewRealEstateWindow.Text), Double.Parse(this.TextBoxHouseAreaSelectNewRealEstateWindow.Text), (House.TypesOfOven)this.ComboBoxTypeOfOven.SelectedItem,
+                            Double.Parse(this.TextBoxRentSelectNewRealEstateWindow.Text)));
+                        if (this.CheckBoxTypeHome.IsChecked == true)
+                            this.RealEstatesListTemp.Add(this.RealEstatesList.Last());
+                        break;
+                    case Types.Działka:
+                        this.RealEstatesList.Add(new Plot(Plot.PlotTypes.Budowlana, Double.Parse(this.TextBoxPriceSelectNewRealEstateWindow.Text),
+                            Double.Parse(this.TextBoxSurfaceSelectNewRealEstateWindow.Text), (Cities)this.ComboBoxCity.SelectedItem, (Markets)this.ComboBoxMarket.SelectedItem));
+                        if (this.CheckBoxTypePlot.IsChecked == true)
+                            this.RealEstatesListTemp.Add(this.RealEstatesList.Last());
+                        break;
+
+                }
+                MessageBox.Show("Pomyślnie dodano nieruchomość");
+                this.RefreshListView();
             }
             else
                 MessageBox.Show("Należy uzupełnić wszystkie pola.");
@@ -615,11 +797,15 @@ namespace RealEstateProject
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void RefreshListViewAdmin()
+        private void RefreshListViewUsers(bool isArchive)
         {
-            this.listviewOferts.ItemsSource = null;
-            this.listviewOferts.ItemsSource = this.RealEstatesList;
+            this.listviewUsers.ItemsSource = null;
+            if (!isArchive)
+                this.listviewUsers.ItemsSource = this.UsersList.Where(x => x.Archive == false && x.UserID != 1).OrderBy(x => x.UserID);
+            else
+                this.listviewUsers.ItemsSource = this.UsersList.Where(x => x.UserID != 1).OrderBy(x => x.UserID);
         }
+
 
         private void RefreshListViewCustomer(int adminStatus)
         {
@@ -634,7 +820,47 @@ namespace RealEstateProject
             }
         }
 
-        #endregion
+
+        private void ButtonBanUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.listviewUsers.SelectedItem != null)
+            {
+                var selectedUser = this.UsersList.Where(x => x.Equals(this.listviewUsers.SelectedItem)).FirstOrDefault();
+                if (!selectedUser.Archive)
+                {
+                    selectedUser.Archive = true;
+                    if (this.checkboxShowArchive.IsChecked == true)
+                        this.RefreshListViewUsers(true);
+                    else
+                        this.RefreshListViewUsers(false);
+                    MessageBox.Show("Użytkownik został pomyślnie zbanowany");
+                }
+                else
+                    MessageBox.Show("Uzytkownik jest już zbanowany.");
+            }
+            else
+                MessageBox.Show("Należy wybrać użytkownika z listy");
+        }
+
+        private void CheckboxShowArchive_Checked(object sender, RoutedEventArgs e)
+        {
+            this.RefreshListViewUsers(true);
+        }
+
+        private void CheckboxShowArchive_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.RefreshListViewUsers(false);
+        }
+
+        private void ComboBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.SetTextBlocks();
+        }
+
+
+
+
+    #endregion
 
 
     }
