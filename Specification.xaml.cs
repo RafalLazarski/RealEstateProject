@@ -35,9 +35,7 @@ namespace RealEstateProject
             this.RealEstateList = realEstateList;
             this.RealEstate = realEstate;
             
-        }
-
-        
+        }        
 
         private void SetTextBlocks(RealEstate realEstate)
         {
@@ -51,7 +49,7 @@ namespace RealEstateProject
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
             }
 
-            if (realEstate.OwnerID != 1 || realEstate.SoldItem)
+            if (realEstate.OwnerID != 1 && realEstate.SoldItem)
             {
                 ButtonDeleteProduct.Visibility = Visibility.Collapsed;
                 ButtonReservation.Visibility = Visibility.Collapsed;
@@ -69,6 +67,7 @@ namespace RealEstateProject
                     TextBlockRoomsSpecification.Visibility = Visibility.Collapsed;
                     TextBlockPlotTypes.Visibility = Visibility.Collapsed;
                     TextBlockPlotTypesSpecification.Visibility = Visibility.Collapsed;
+                    this.TextBlockNumberofFloors.Text = "Liczba pięter";
                     break;
                 case "Mieszkanie":
                     TextBlockTypeOfOven.Visibility = Visibility.Collapsed;
@@ -134,6 +133,5 @@ namespace RealEstateProject
             RoutedEventArgs routedEventArgs = new RoutedEventArgs();
             ButtonReserveItemClick(this, routedEventArgs);
         }
-
     }
 }

@@ -109,13 +109,9 @@
                             <ComboBox x:Name="ComboBoxPlotTypes" />
                         </StackPanel>
 
-                        <Button x:Name="buttonAddRealEstate" Grid.Row="9"  Grid.Column="1" Grid.ColumnSpan="2" Height="50" Margin="5,5,5,0" VerticalAlignment="Top" Content="Dodaj nieruchomość" Click="buttonAddRealEstate_Click" />
+                        <Button x:Name="buttonAddRealEstate" Grid.Row="9"  Grid.Column="1" Grid.ColumnSpan="2" Height="50" Margin="5,5,5,0" VerticalAlignment="Top" Content="Dodaj nieruchomość" Click="ButtonAddRealEstate_Click" />
 
                     </Grid>
-                    
-                    
-                    
-                    
 
                     <!--Produkty-->
                     <Grid  Margin="10" x:Name="listviewOfertsGrid" Grid.Row="2" Grid.ColumnSpan="5">
@@ -123,18 +119,14 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Rodzaj:" x:Name="EstateType" Width="150" DisplayMemberBinding="{Binding Type}"/>
-                                    <GridViewColumn Header="Cena:" x:Name="EstatePrice" Width="150"  DisplayMemberBinding="{Binding Price}" />
-                                    <GridViewColumn Header="Powierzchnia:" x:Name="EstateArea" Width="150" DisplayMemberBinding="{Binding Surface}" />
+                                    <GridViewColumn Header="Cena (zł):" x:Name="EstatePrice" Width="150"  DisplayMemberBinding="{Binding Price}" />
+                                    <GridViewColumn Header="Powierzchnia (m2):" x:Name="EstateArea" Width="150" DisplayMemberBinding="{Binding Surface}" />
                                     <GridViewColumn Header="Miasto:" x:Name="EstateCity" Width="150" DisplayMemberBinding="{Binding City}" />
                                     <GridViewColumn Header="Rynek:" x:Name ="EstateMarket" Width="150"  DisplayMemberBinding="{Binding Market}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
                     </Grid>
-                    
-                    
-                    
-                    
 
 
                     <!--Rodzaj nieruchomości-->
@@ -310,9 +302,9 @@
 
                     </Grid>
 
-                        <!--Druga kolumna-->
+                    <!--Druga kolumna-->
 
-                        <!--Kupione działki-->
+                    <!--Kupione działki-->
 
                     <!--użytkownik-->
                     <TextBlock Visibility="Visible" x:Name="TextBlockUserProducts" Grid.Row="0" Grid.Column="1" Text="Twoje nieruchomości:" FontSize="16" FontWeight="Bold" VerticalAlignment="Bottom" Margin="10 5 0 5"/>
@@ -325,32 +317,23 @@
 
                     <!--Lista nieruchomości-->
                     <ListView Margin="10 0" x:Name="listviewCustomer" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Rodzaj:" x:Name="EstateTypeCustomer" Width="80" DisplayMemberBinding="{Binding Type}"/>
-                                    <GridViewColumn Header="Cena:" x:Name="EstatePriceCustomer" Width="80" DisplayMemberBinding="{Binding Price}" />
-                                    <GridViewColumn Header="Powierzchnia:" x:Name="EstateAreaCustomer" Width="80" DisplayMemberBinding="{Binding Surface}" />
-                                    <GridViewColumn Header="Miasto:" x:Name="EstateCityCustomer" Width="80" DisplayMemberBinding="{Binding City}" />
-                                    <GridViewColumn Header="Rynek:" x:Name ="EstateMarketCustomer" Width="80" DisplayMemberBinding="{Binding Market}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Rodzaj:" x:Name="EstateTypeCustomer" Width="100" DisplayMemberBinding="{Binding Type}"/>
+                                <GridViewColumn Header="Cena (zł):" x:Name="EstatePriceCustomer" Width="100" DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Header="Powierzchnia (m2):" x:Name="EstateAreaCustomer" Width="100" DisplayMemberBinding="{Binding Surface}" />
+                                <GridViewColumn Header="Miasto:" x:Name="EstateCityCustomer" Width="100" DisplayMemberBinding="{Binding City}" />
+                                <GridViewColumn Header="Rynek:" x:Name ="EstateMarketCustomer" Width="100" DisplayMemberBinding="{Binding Market}" />
+                                <GridViewColumn Header="Uzytkownik:" x:Name="EstateOwner" Width="100"  DisplayMemberBinding="{Binding OwnerName}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
 
                 </Grid>
             </TabItem>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
             <TabItem x:Name="tabitemAdminPanel" Header="Panel administratora">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -361,11 +344,10 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    
+
                     <Button x:Name="buttonBanUser" Content="Zbanuj użytkownika" Click="ButtonBanUser_Click" Width="120" Height="40" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5 10 5 0"/>
                     <CheckBox x:Name="checkboxShowArchive" Checked="CheckboxShowArchive_Checked" Unchecked="CheckboxShowArchive_Unchecked" Content="archiwalni użytkownicy" VerticalContentAlignment="Center" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Margin="5"/>
 
-                    <!--Lista wszystkich produktów-->
                     <ListView Margin="10" x:Name="listviewUsers" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                         <ListView.View>
                             <GridView>
@@ -373,6 +355,19 @@
                                 <GridViewColumn Header="Imię:"  Width="120" DisplayMemberBinding="{Binding Name}" />
                                 <GridViewColumn Header="Nazwisko:"  Width="120" DisplayMemberBinding="{Binding Surname}" />
                                 <GridViewColumn Header="Archiwalny:"  Width="120" DisplayMemberBinding="{Binding Archive}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+
+            <TabItem x:Name="tabitemMailInbox" Header="Skrzynka pocztowa">
+                <Grid>
+                    <ListView Margin="10" x:Name="listviewMailInbox" Width="750" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Treść:"  Width="740" />
                             </GridView>
                         </ListView.View>
                     </ListView>

@@ -19,7 +19,6 @@ namespace RealEstateProject
         public House(Plot housePlot, int numberOfFloors, double area, TypesOfOven typeOfOven, double rent)
             : base(rent)
         {
-            ++RealEstate.RealEstateCount;
             this.RealEstateID = RealEstate.RealEstateCount;
             this.HousePlot = housePlot;
             this.NumberOfFloors = numberOfFloors;
@@ -31,7 +30,6 @@ namespace RealEstateProject
             this.TypeOfOven = typeOfOven.ToString();
 
         }
-
 
         public enum TypesOfOven
         {

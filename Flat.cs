@@ -28,7 +28,7 @@ namespace RealEstateProject
         public enum FlatStandards
         {
             Komunalne,
-            KlasyŚredniej,
+            Klasy_Średniej,
             Apartament
         }
 

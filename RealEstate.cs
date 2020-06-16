@@ -18,9 +18,10 @@ namespace RealEstateProject
         public double Rent { get; set; }
         public string Market { get; set; }
         public virtual int RealEstateID { get; set; }
-        public static int RealEstateCount = 1;
+        public static int RealEstateCount = 0;
         public int OwnerID { get; set;}
         public bool SoldItem { get; set; }
+        public string OwnerName { get; set; }
 
         //działka
         public RealEstate(double price, double surface, Cities city, Markets market)
@@ -59,7 +60,7 @@ namespace RealEstateProject
         public enum Cities
         {
             Białystok,
-            BuenosAires,
+            Buenos_Aires,
             Moskwa
         }
 

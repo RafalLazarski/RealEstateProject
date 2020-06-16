@@ -71,7 +71,6 @@ namespace RealEstateProject
                     {
                         this.Hide();
                         MainMenu menu = new MainMenu(currentUser.FirstOrDefault().UserID, this.UsersList);
-
                         menu.ButtonLogoutClick += (_sender, _e) =>
                         {
                             this.Show();
@@ -84,6 +83,7 @@ namespace RealEstateProject
                 else
                     MessageBox.Show("Podano błędne dane logowania!");
             }
+            this.passwordBox.Password = null;
         }
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
@@ -111,8 +111,11 @@ namespace RealEstateProject
                     this.ButtonLogin.Content = "Zaloguj się";
                     this.ButtonRegister.Content = "Nie mam jeszcze konta, zarejestruj mnie!";
                     MessageBox.Show("Pomyślnie zarejestrowano nowego użytkownika.");
+                    this.textBoxName.Text = null;
+                    this.textBoxSurname.Text = null;
                 }
             }
+            this.passwordBox.Password = null;
         }
 
         private bool Validate()
