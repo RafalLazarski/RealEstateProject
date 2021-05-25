@@ -1,7 +1,7 @@
 # RealEstateProject
 
 Autorzy:
-Juliusz Mandrosz
+Juliusz Mandrosz,
 Rafał Łazarski
 
 Temat projektu: Agencja nieruchomości
