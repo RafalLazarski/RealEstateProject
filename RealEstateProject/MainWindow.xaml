@@ -1,0 +1,38 @@
+﻿<Window x:Class="RealEstateProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RealEstateProject"
+        WindowStartupLocation="CenterScreen"
+        Closing="DataWindow_Closing" 
+        mc:Ignorable="d"         
+        Title="MainWindow" MinHeight="550" MaxHeight="550" Width="450" MinWidth="450" MaxWidth="450">
+    <!--MinHeight="350" MaxHeight="350"-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="30"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="20"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="20"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="20"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="textBlockLogin" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" Text="Login:"/>
+        <TextBox x:Name="textBoxLogin" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockPassword" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="1" Text="Password:"/>
+        <PasswordBox x:Name="passwordBox" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="3" Grid.Column="1"  PasswordChar="*"/>
+        <TextBlock x:Name="textBlockName" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="4" Grid.Column="1" Text="Name:"/>
+        <TextBox x:Name="textBoxName" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="5" Grid.Column="1"/>
+        <TextBlock x:Name="textBlockSurname" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="6" Grid.Column="1" Text="Surname:"/>
+        <TextBox x:Name="textBoxSurname" FontSize="16" MaxLength="20" VerticalContentAlignment="Center" MaxWidth="250" Grid.Row="7" Grid.Column="1"/>
+        <Button x:Name="ButtonLogin" MaxWidth="250" Height="40" VerticalAlignment="Bottom" Margin="10" Grid.Row="8" Grid.Column="1" Click="ButtonLogin_Click" Content="Log In"/>
+        <Button x:Name="ButtonRegister" MaxWidth="250" Height="40" VerticalAlignment="Top" Margin="10" Grid.Row="9" Grid.Column="1" Click="ButtonRegister_Click" Content="I do not have an account yet, register me!"/>
+
+    </Grid>
+</Window>
